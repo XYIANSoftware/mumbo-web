@@ -174,7 +174,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <Image
-                src="/images/mumbo-icon-2.png"
+                src="/images/mumbo-bg-1.png"
                 alt="Mumbo in action"
                 fill
                 className="object-cover object-center"
