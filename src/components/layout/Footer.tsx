@@ -3,34 +3,44 @@
 import Link from 'next/link';
 
 const socialLinks = [
-  { label: 'SoundCloud', icon: 'pi pi-cloud', url: 'https://soundcloud.com' },
-  { label: 'Instagram', icon: 'pi pi-instagram', url: 'https://instagram.com' },
-  { label: 'YouTube', icon: 'pi pi-youtube', url: 'https://youtube.com' },
-  { label: 'Twitter', icon: 'pi pi-twitter', url: 'https://twitter.com' },
-];
+  {
+    label: 'Instagram',
+    url: 'https://instagram.com/djmumbo',
+    icon: 'pi pi-instagram'
+  },
+  {
+    label: 'Twitter',
+    url: 'https://twitter.com/djmumbo',
+    icon: 'pi pi-twitter'
+  },
+  {
+    label: 'YouTube',
+    url: 'https://youtube.com/djmumbo',
+    icon: 'pi pi-youtube'
+  },
+  {
+    label: 'SoundCloud',
+    url: 'https://soundcloud.com/djmumbo',
+    icon: 'pi pi-cloud'
+  }
+] as const;
 
-const quickLinks = [
-  { label: 'Events', path: '/events' },
-  { label: 'Music', path: '/music' },
-  { label: 'Gallery', path: '/gallery' },
-  { label: 'About', path: '/about' },
-  { label: 'Contact', path: '/contact' },
-];
-
-const Footer = () => {
+export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-background-primary mt-auto">
-      <div className="container mx-auto px-4 py-8">
+    <footer className="bg-background-secondary py-12">
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Brand Section */}
+          {/* Brand */}
           <div className="flex flex-col items-center md:items-start">
-            <Link href="/" className="text-2xl font-bold text-white mb-4">
-              DJ MUMBO
+            <Link href="/" className="mb-4">
+              <span className="font-display text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-secondary-light">
+                DJ MUMBO
+              </span>
             </Link>
             <p className="text-gray-400 text-center md:text-left">
-              Bringing the fusion of EDM and playful vibes to your ears
+              Experience the fusion of EDM and playful vibes
             </p>
           </div>
 
@@ -38,15 +48,18 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-semibold text-white mb-4">Quick Links</h3>
             <nav className="flex flex-col gap-2">
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  className="text-gray-400 hover:text-primary-light transition-colors"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              <Link href="/events" className="text-gray-400 hover:text-primary-light transition-colors">
+                Events
+              </Link>
+              <Link href="/music" className="text-gray-400 hover:text-primary-light transition-colors">
+                Music
+              </Link>
+              <Link href="/about" className="text-gray-400 hover:text-primary-light transition-colors">
+                About
+              </Link>
+              <Link href="/contact" className="text-gray-400 hover:text-primary-light transition-colors">
+                Contact
+              </Link>
             </nav>
           </div>
 
@@ -77,6 +90,4 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-export default Footer; 
+} 

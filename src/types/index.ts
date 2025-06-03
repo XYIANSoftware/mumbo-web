@@ -1,5 +1,3 @@
-import { TargetAndTransition, VariantLabels } from 'framer-motion';
-
 export interface Event {
   id: string;
   title: string;
@@ -74,9 +72,9 @@ export interface ButtonProps {
 }
 
 export interface AnimationProps {
-  initial?: TargetAndTransition | VariantLabels;
-  animate?: TargetAndTransition | VariantLabels;
-  exit?: TargetAndTransition | VariantLabels;
+  initial?: boolean | { [key: string]: number | string };
+  animate?: { [key: string]: number | string };
+  exit?: { [key: string]: number | string };
   transition?: {
     duration?: number;
     delay?: number;

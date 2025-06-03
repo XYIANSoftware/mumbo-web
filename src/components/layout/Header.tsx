@@ -6,8 +6,6 @@ import { usePathname } from 'next/navigation';
 import { Toolbar } from 'primereact/toolbar';
 import { Sidebar } from 'primereact/sidebar';
 import { Button } from 'primereact/button';
-import { Menu } from 'primereact/menu';
-import { useRef } from 'react';
 
 const navItems = [
   { label: 'Home', path: '/' },
@@ -16,17 +14,11 @@ const navItems = [
   { label: 'Gallery', path: '/gallery' },
   { label: 'About', path: '/about' },
   { label: 'Contact', path: '/contact' },
-];
+] as const;
 
-type NavItem = {
-  label: string;
-  path: string;
-};
-
-const Header = () => {
+export default function Header() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
   const pathname = usePathname();
-  const menuRef = useRef<Menu>(null);
 
   const start = (
     <Link href="/" className="flex items-center gap-2 no-underline">
@@ -114,6 +106,4 @@ const Header = () => {
       </Sidebar>
     </>
   );
-};
-
-export default Header; 
+} 
