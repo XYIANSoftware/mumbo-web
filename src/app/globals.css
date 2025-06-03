@@ -66,6 +66,17 @@ h1, h2, h3, h4, h5, h6 {
   background: rgba(99, 102, 241, 0.1);
 }
 
+/* Add padding for rounded buttons */
+.p-button.p-button-rounded {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.p-button.p-button-rounded.p-button-lg {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
+
 .p-menubar {
   background: transparent;
   border: none;

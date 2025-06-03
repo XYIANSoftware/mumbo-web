@@ -86,7 +86,7 @@ export default function Home() {
               <Button
                 label="Listen Now"
                 icon="pi pi-play"
-                className="p-button-rounded p-button-lg p-button-outlined"
+                className="p-button-rounded p-button-lg p-button-secondary"
               />
             </Link>
           </motion.div>
