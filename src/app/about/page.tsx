@@ -27,7 +27,7 @@ const socialLinks = [
   },
   {
     platform: 'Twitter',
-    url: 'https://twitter.com/Mumbobeatz',
+    url: 'https://twitter.com/mumbobeatz',
     icon: 'pi pi-twitter'
   },
   {
@@ -41,7 +41,7 @@ export default function AboutPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <PageHeader
-        title="About DJ Mumbo"
+        title="About Mumbo"
         subtitle="The story behind the beats"
       />
 
@@ -55,14 +55,14 @@ export default function AboutPage() {
             <div className="relative aspect-square rounded-lg overflow-hidden mb-6">
               <img
                 src="/images/mumbo-assets/M_B04850-1-NR.jpg"
-                alt="DJ Mumbo"
+                alt="Mumbo"
                 className="object-cover w-full h-full"
               />
             </div>
             <div className="flex justify-center mb-6">
               <img
                 src="/images/mumbo-assets/Mumbo Logo.png"
-                alt="DJ Mumbo Logo"
+                alt="Mumbo Logo"
                 className="h-24 w-auto"
               />
             </div>
@@ -92,10 +92,10 @@ export default function AboutPage() {
             <div className="prose prose-invert max-w-none">
               <h2 className="text-2xl font-semibold mb-6">The Journey</h2>
               <p className="mb-4">
-                DJ Mumbo is an innovative electronic music producer and DJ, known for blending EDM with playful, cartoon-inspired elements. With releases like "Feelin' Pretty Suavé" and "Project Seismic", Mumbo has established a unique sound that bridges the gap between energetic dance music and nostalgic vibes.
+                Mumbo is an innovative electronic music producer and artist, known for blending EDM with playful, cartoon-inspired elements. With releases like "Feelin' Pretty Suavé" and "Project Seismic", Mumbo has established a unique sound that bridges the gap between energetic dance music and nostalgic vibes.
               </p>
               <p className="mb-4">
-                Starting with the "Mumbo Jumbo" series, which has now reached its 6th episode, DJ Mumbo has consistently pushed the boundaries of electronic music. Each release showcases a perfect fusion of hard-hitting beats and whimsical elements that set him apart in the EDM scene.
+                Starting with the "Mumbo Jumbo" series, which has now reached its 6th episode, Mumbo has consistently pushed the boundaries of electronic music. Each release showcases a perfect fusion of hard-hitting beats and whimsical elements that set him apart in the EDM scene.
               </p>
               <p className="mb-4">
                 Recent projects include the successful "Mumbo's Secret Stuff Vol. 1" and notable remixes like the "Satellite (Mumbo Flip)" and "Eat the Bass (Mumbo flip)", demonstrating versatility and innovation in production.
@@ -109,7 +109,7 @@ export default function AboutPage() {
                 <li>Eat the Bass (Mumbo flip)</li>
               </ul>
               <p>
-                Catch DJ Mumbo live at various venues and festivals, where the energy of his productions comes to life in dynamic, unforgettable performances.
+                Catch Mumbo live at various venues and festivals, where the energy of his productions comes to life in dynamic, unforgettable performances.
               </p>
             </div>
           </Card>

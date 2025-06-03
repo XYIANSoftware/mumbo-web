@@ -12,6 +12,7 @@ const navItems = [
   { label: 'Events', path: '/events' },
   { label: 'Music', path: '/music' },
   { label: 'Gallery', path: '/gallery' },
+  { label: 'Links', path: '/links' },
   { label: 'About', path: '/about' },
   { label: 'Contact', path: '/contact' },
 ] as const;
@@ -23,7 +24,7 @@ export default function Header() {
   const start = (
     <Link href="/" className="flex items-center gap-2 no-underline">
       <span className="font-display text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-light to-secondary-light">
-        DJ MUMBO
+        MUMBO
       </span>
     </Link>
   );
@@ -49,7 +50,7 @@ export default function Header() {
       <Button
         icon="pi pi-bars"
         onClick={() => setSidebarVisible(true)}
-        className="md:hidden p-button-text p-button-rounded text-white hover:bg-background-paper/30"
+        className="md:hidden p-button-text text-white hover:bg-background-paper/30 p-3"
         aria-label="Menu"
       />
     </div>
@@ -80,7 +81,7 @@ export default function Header() {
             <Button
               icon="pi pi-times"
               onClick={() => setSidebarVisible(false)}
-              className="p-button-text p-button-rounded text-white hover:bg-background-paper/30"
+              className="p-button-text text-white hover:bg-background-paper/30 p-3"
               aria-label="Close"
             />
           </div>
