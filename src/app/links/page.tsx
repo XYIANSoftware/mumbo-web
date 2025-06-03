@@ -2,7 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { Button } from 'primereact/button';
+import { Accordion, AccordionTab } from 'primereact/accordion';
 import Image from 'next/image';
+import { FaSpotify, FaSoundcloud } from 'react-icons/fa';
 
 interface Link {
   title: string;
@@ -12,70 +14,7 @@ interface Link {
   platform?: string;
 }
 
-const links: Link[] = [
-  {
-    title: "Feelin' Pretty Suavé",
-    url: "https://open.spotify.com/track/your-track-id",
-    icon: "pi pi-spotify",
-    type: "music",
-    platform: "SPOTIFY"
-  },
-  {
-    title: "Satellite (Mumbo Flip)",
-    url: "https://open.spotify.com/track/your-track-id",
-    icon: "pi pi-spotify",
-    type: "music",
-    platform: "SPOTIFY"
-  },
-  {
-    title: "Project Seismic",
-    url: "https://open.spotify.com/track/your-track-id",
-    icon: "pi pi-spotify",
-    type: "music",
-    platform: "SPOTIFY"
-  },
-  {
-    title: "Eat the Bass (Mumbo flip)",
-    url: "https://open.spotify.com/track/your-track-id",
-    icon: "pi pi-spotify",
-    type: "music",
-    platform: "SPOTIFY"
-  },
-  {
-    title: "Mumbo's Secret Stuff Vol. 1",
-    url: "https://soundcloud.com/mumbobeatz",
-    icon: "pi pi-cloud",
-    type: "music",
-    platform: "SOUNDCLOUD"
-  },
-  {
-    title: "Emorfik 1/25: Mumbo Live Set!",
-    url: "https://soundcloud.com/mumbobeatz",
-    icon: "pi pi-cloud",
-    type: "music",
-    platform: "SOUNDCLOUD"
-  },
-  {
-    title: "Mumbo Jumbo Ep. 6: Bloom Debut",
-    url: "https://soundcloud.com/mumbobeatz",
-    icon: "pi pi-cloud",
-    type: "music",
-    platform: "SOUNDCLOUD"
-  },
-  {
-    title: "Mumbo Jumbo Ep. 5 Wonky Wubz",
-    url: "https://soundcloud.com/mumbobeatz",
-    icon: "pi pi-cloud",
-    type: "music",
-    platform: "SOUNDCLOUD"
-  },
-  {
-    title: "Mumbo Jumbo Ep. 4 Boots & Cat's Mix",
-    url: "https://soundcloud.com/mumbobeatz",
-    icon: "pi pi-cloud",
-    type: "music",
-    platform: "SOUNDCLOUD"
-  },
+const socialLinks: Link[] = [
   {
     title: "TikTok",
     url: "https://tiktok.com/@mumbobeatz",
@@ -108,12 +47,67 @@ const links: Link[] = [
   }
 ];
 
+const spotifyLinks: Link[] = [
+  {
+    title: "Feelin' Pretty Suavé",
+    url: "https://open.spotify.com/track/26Sx99DCrKHnovO2snGyPu",
+    icon: "pi pi-spotify",
+    type: "music",
+    platform: "SPOTIFY"
+  },
+  {
+    title: "Satellite (Mumbo Flip)",
+    url: "https://open.spotify.com/track/your-track-id",
+    icon: "pi pi-spotify",
+    type: "music",
+    platform: "SPOTIFY"
+  }
+];
+
+const soundcloudLinks: Link[] = [
+  {
+    title: "Mumbo's Secret Stuff Vol. 1",
+    url: "https://soundcloud.com/mumbobeatz",
+    icon: "pi pi-cloud",
+    type: "music",
+    platform: "SOUNDCLOUD"
+  },
+  {
+    title: "Emorfik 1/25: Mumbo Live Set!",
+    url: "https://soundcloud.com/mumbobeatz",
+    icon: "pi pi-cloud",
+    type: "music",
+    platform: "SOUNDCLOUD"
+  }
+];
+
+const AnimatedShape = ({ className }: { className?: string }) => (
+  <motion.div
+    className={`absolute rounded-full bg-gradient-to-r from-primary-light/10 to-secondary-light/10 ${className}`}
+    animate={{
+      scale: [1, 1.2, 1],
+      rotate: [0, 180, 360],
+      opacity: [0.3, 0.2, 0.3]
+    }}
+    transition={{
+      duration: 15,
+      repeat: Infinity,
+      ease: "linear"
+    }}
+  />
+);
+
 export default function LinksPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center px-4 py-12 max-w-2xl mx-auto">
+    <div className="min-h-screen flex flex-col items-center px-4 py-12 max-w-2xl mx-auto relative overflow-hidden">
+      {/* Animated Background Shapes */}
+      <AnimatedShape className="w-[400px] h-[400px] -bottom-20 -left-20" />
+      <AnimatedShape className="w-[300px] h-[300px] -top-20 -right-20" />
+      <AnimatedShape className="w-[200px] h-[200px] bottom-40 right-20" />
+
       {/* Profile Section */}
       <motion.div
-        className="text-center mb-12"
+        className="text-center mb-12 relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
@@ -136,48 +130,14 @@ export default function LinksPage() {
         <p className="text-gray-300">Do the things you love</p>
       </motion.div>
 
-      {/* Music Links */}
+      {/* Social Links */}
       <motion.div
-        className="w-full space-y-3 mb-8"
+        className="w-full grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8 relative z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <h2 className="text-xl font-semibold mb-4">Latest Music</h2>
-        {links.filter(link => link.type === 'music').map((link, index) => (
-          <motion.div
-            key={link.title}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: index * 0.1 }}
-          >
-            <Button
-              onClick={() => window.open(link.url, '_blank')}
-              className="w-full p-button-outlined mb-2 relative overflow-hidden group"
-            >
-              <div className="flex items-center gap-3 py-3">
-                <i className={`${link.icon} text-xl`}></i>
-                <div className="flex-1 text-left">
-                  <div className="font-medium">{link.title}</div>
-                  {link.platform && (
-                    <div className="text-sm text-gray-400">{link.platform}</div>
-                  )}
-                </div>
-              </div>
-              <div className="absolute inset-0 bg-gradient-to-r from-primary-light/10 to-secondary-light/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></div>
-            </Button>
-          </motion.div>
-        ))}
-      </motion.div>
-
-      {/* Social Links */}
-      <motion.div
-        className="w-full grid grid-cols-2 sm:grid-cols-3 gap-3"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-        {links.filter(link => link.type === 'social').map((link, index) => (
+        {socialLinks.map((link, index) => (
           <motion.div
             key={link.title}
             initial={{ opacity: 0, scale: 0.9 }}
@@ -195,6 +155,60 @@ export default function LinksPage() {
             </Button>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* Music Links Accordion */}
+      <motion.div
+        className="w-full relative z-10"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        <Accordion>
+          <AccordionTab header={
+            <div className="flex items-center gap-2">
+              <FaSpotify className="text-[#1DB954] text-xl" />
+              <span>Spotify Tracks</span>
+            </div>
+          }>
+            <div className="space-y-2">
+              {spotifyLinks.map((link) => (
+                <Button
+                  key={link.title}
+                  onClick={() => window.open(link.url, '_blank')}
+                  className="w-full p-button-outlined mb-2"
+                >
+                  <div className="flex items-center gap-3 py-2">
+                    <FaSpotify className="text-xl" />
+                    <span>{link.title}</span>
+                  </div>
+                </Button>
+              ))}
+            </div>
+          </AccordionTab>
+
+          <AccordionTab header={
+            <div className="flex items-center gap-2">
+              <FaSoundcloud className="text-[#FF5500] text-xl" />
+              <span>SoundCloud Tracks</span>
+            </div>
+          }>
+            <div className="space-y-2">
+              {soundcloudLinks.map((link) => (
+                <Button
+                  key={link.title}
+                  onClick={() => window.open(link.url, '_blank')}
+                  className="w-full p-button-outlined mb-2"
+                >
+                  <div className="flex items-center gap-3 py-2">
+                    <FaSoundcloud className="text-xl" />
+                    <span>{link.title}</span>
+                  </div>
+                </Button>
+              ))}
+            </div>
+          </AccordionTab>
+        </Accordion>
       </motion.div>
     </div>
   );
