@@ -7,46 +7,64 @@ import Image from 'next/image';
 import { useRef } from 'react';
 
 export default function Home() {
+  const heroRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
+  
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
+  });
+
+  const { scrollYProgress: sectionScroll } = useScroll({
     target: parallaxRef,
     offset: ["start start", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], ['0%', '50%']);
+  const heroY = useTransform(heroScroll, [0, 1], ['0%', '50%']);
+  const sectionY = useTransform(sectionScroll, [0, 1], ['0%', '50%']);
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative h-[100dvh] flex items-start justify-center overflow-hidden">
         {/* Background Image */}
-        <div className="absolute inset-0 z-0">
+        <motion.div style={{ y: heroY }} className="absolute inset-0 z-0 h-full">
           <Image
             src="/images/mumbo-bg-2.png"
-            alt="DJ Mumbo performing"
+            alt="Mumbo performing"
             fill
-            className="object-cover object-center"
+            className="object-cover object-center hidden md:block"
+            priority
+            quality={100}
+          />
+          <Image
+            src="/images/mumbo-bg-m-2.png"
+            alt="Mumbo performing"
+            fill
+            className="object-cover object-center md:hidden"
             priority
             quality={100}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background-primary/80 via-background-primary/50 to-background-primary/80" />
-        </div>
+        </motion.div>
 
         {/* Content */}
-        <div className="relative z-10 text-center px-4">
+        <div className="relative z-10 text-center px-4 pt-[20dvh]">
           <motion.div
             className="mb-8"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
           >
-            <Image
-              src="/images/mumbo-icon-1.png"
-              alt="DJ Mumbo Logo"
-              width={150}
-              height={150}
-              className="mx-auto"
-            />
+            <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden">
+              <Image
+                src="/images/mumbo-assets/IMG_6879.jpeg"
+                alt="Mumbo"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
           </motion.div>
 
           {/* <motion.h1
@@ -79,14 +97,16 @@ export default function Home() {
               <Button
                 label="Upcoming Events"
                 icon="pi pi-calendar"
-                className="p-button-rounded p-button-lg"
+                className="p-button-lg w-full sm:w-auto p-3"
+                size="large"
               />
             </Link>
             <Link href="/music">
               <Button
                 label="Listen Now"
                 icon="pi pi-play"
-                className="p-button-rounded p-button-lg p-button-secondary"
+                className="p-button-lg p-button-secondary w-full sm:w-auto p-3"
+                size="large"
               />
             </Link>
           </motion.div>
@@ -110,10 +130,10 @@ export default function Home() {
 
       {/* Parallax Section */}
       <section ref={parallaxRef} className="relative h-[50vh] overflow-hidden">
-        <motion.div style={{ y }} className="absolute inset-0">
+        <motion.div style={{ y: sectionY }} className="absolute inset-0 h-full">
           <Image
             src="/images/mumbo-bg-1.png"
-            alt="DJ Mumbo Background"
+            alt="Mumbo Background"
             fill
             className="object-cover object-center"
             quality={100}
@@ -147,7 +167,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col lg:flex-row items-center gap-12 mb-16">
             <motion.div
-              className="flex-1 relative aspect-square max-w-lg rounded-2xl overflow-hidden"
+              className="flex-1 relative aspect-square max-w-lg rounded-2xl overflow-hidden h-[400px]"
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
@@ -155,7 +175,7 @@ export default function Home() {
             >
               <Image
                 src="/images/mumbo-icon-2.png"
-                alt="DJ Mumbo in action"
+                alt="Mumbo in action"
                 fill
                 className="object-cover object-center"
                 quality={90}
@@ -168,9 +188,9 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">About DJ Mumbo</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">About Mumbo</h2>
               <p className="text-lg text-gray-300 mb-8">
-                Get ready for an unforgettable journey through sound and rhythm. DJ Mumbo brings
+                Get ready for an unforgettable journey through sound and rhythm. Mumbo brings
                 a unique blend of electronic beats and nostalgic vibes that will keep you moving
                 all night long.
               </p>
