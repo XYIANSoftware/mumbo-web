@@ -50,19 +50,19 @@ const galleryItems: GalleryItem[] = [
   },
   {
     id: '5',
-    title: 'Bloom Performance',
-    type: 'video',
-    src: '/images/mumbo-assets/2024_0906-BloomFootage_00244264_V1-0007.mov',
+    title: 'Bloom Night',
+    type: 'image',
+    src: '/images/mumbo-assets/2024_0906-Bloom_046.jpeg',
     thumbnail: '/images/mumbo-assets/2024_0906-Bloom_046.jpeg',
-    description: 'Live performance highlights from Bloom'
+    description: 'Live performance at Bloom'
   },
   {
     id: '6',
-    title: 'DJ Set Highlights',
-    type: 'video',
-    src: '/images/mumbo-assets/2024_0906-BloomFootage_00230164_V1-0003.mov',
+    title: 'Peak Moment',
+    type: 'image',
+    src: '/images/mumbo-assets/2024_0906-Bloom_049.jpeg',
     thumbnail: '/images/mumbo-assets/2024_0906-Bloom_049.jpeg',
-    description: 'Dropping the latest tracks at Bloom'
+    description: 'The crowd going wild at Bloom'
   },
   {
     id: '7',
