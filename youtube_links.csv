@@ -1,0 +1,4 @@
+id,created_at,updated_at,title,url,platform,type,image_url,description
+290f1ee6-6c54-4b01-90e6-d701748f0857,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Official Music Video,https://youtube.com/watch?v=example1,YOUTUBE,TRACK,https://img.youtube.com/vi/example1/maxresdefault.jpg,The official music video for my latest single
+290f1ee6-6c54-4b01-90e6-d701748f0858,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Studio Session,https://youtube.com/watch?v=example2,YOUTUBE,TRACK,https://img.youtube.com/vi/example2/maxresdefault.jpg,Behind the scenes in the studio
+290f1ee6-6c54-4b01-90e6-d701748f0859,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Live Performance,https://youtube.com/watch?v=example3,YOUTUBE,TRACK,https://img.youtube.com/vi/example3/maxresdefault.jpg,Live at EDC 2024 
