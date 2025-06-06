@@ -1,0 +1,11 @@
+[
+  {
+    "id": "1",
+    "title": "Latest Album",
+    "url": "https://open.spotify.com/album/your-album-id",
+    "platform": "SPOTIFY",
+    "type": "ALBUM",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  }
+] 

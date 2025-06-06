@@ -6,6 +6,7 @@ import './globals.css';
 
 import { Inter } from 'next/font/google';
 import ClientLayout from '@/components/layout/ClientLayout';
+import AuthProvider from '@/components/providers/AuthProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -40,9 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.className} antialiased`}>
       <body className="min-h-screen bg-background-primary text-white">
-        <ClientLayout>
-          <main>{children}</main>
-        </ClientLayout>
+        <AuthProvider>
+          <ClientLayout>
+            <main>{children}</main>
+          </ClientLayout>
+        </AuthProvider>
       </body>
     </html>
   );

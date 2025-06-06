@@ -1,0 +1,4 @@
+id,created_at,updated_at,title,url,platform,type,image_url,description
+a290f1ee-6c54-4b01-90e6-d701748f0854,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,New Mix 2024,https://soundcloud.com/example1,SOUNDCLOUD,TRACK,https://i1.sndcdn.com/example1,Fresh beats for 2024
+b290f1ee-6c54-4b01-90e6-d701748f0855,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Remix Collection,https://soundcloud.com/example2,SOUNDCLOUD,PLAYLIST,https://i1.sndcdn.com/example2,All my latest remixes
+c290f1ee-6c54-4b01-90e6-d701748f0856,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Live Set Recording,https://soundcloud.com/example3,SOUNDCLOUD,TRACK,https://i1.sndcdn.com/example3,Recorded live at Ultra 2024 

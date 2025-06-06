@@ -1,0 +1,4 @@
+id,created_at,updated_at,title,date,location,description,image_url,ticket_url
+290f1ee6-6c54-4b01-90e6-d701748f0860,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Summer Festival 2024,2024-07-15T20:00:00Z,Central Park NYC,Join me for an amazing summer night of music,https://example.com/images/summer-fest.jpg,https://tickets.com/summer-fest
+290f1ee6-6c54-4b01-90e6-d701748f0861,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Club Night,2024-05-20T22:00:00Z,The Underground LA,Exclusive club performance,https://example.com/images/club-night.jpg,https://tickets.com/club-night
+290f1ee6-6c54-4b01-90e6-d701748f0862,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Album Release Party,2024-06-01T21:00:00Z,Studio 54 Miami,Celebrating the release of my new album,https://example.com/images/release-party.jpg,https://tickets.com/release-party 
