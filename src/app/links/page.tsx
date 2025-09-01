@@ -8,7 +8,7 @@ import { FaSpotify, FaSoundcloud, FaYoutube } from 'react-icons/fa';
 import { ContentCard } from '@/components/ui/ContentCard';
 import { MusicLink, SocialLink } from '@/types/content';
 import { Button } from 'primereact/button';
-import { getSpotifyLinks, getSoundCloudLinks, getYouTubeLinks, getSocialLinks } from '@/lib/db-service';
+import { getSpotifyLinks, getSoundCloudLinks, getYouTubeLinks, getSocialLinks } from '@/lib/data-service';
 
 const AnimatedShape = ({ className }: { className?: string }) => (
   <motion.div

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^2.1.1",
-    "@supabase/supabase-js": "^2.49.9",
+
     "@types/next-auth": "^3.13.0",
     "framer-motion": "^11.0.3",
     "next": "^15.3.3",

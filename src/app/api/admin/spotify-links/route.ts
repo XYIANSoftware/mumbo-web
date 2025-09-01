@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { getSpotifyLinks, updateSpotifyLinks } from '@/lib/db-service';
+import { getSpotifyLinks } from '@/lib/data-service';
 
 export async function GET() {
   const session = await getServerSession();
@@ -25,19 +25,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  try {
-    const links = await request.json();
-    
-    // Validate the data
-    if (!Array.isArray(links)) {
-      return NextResponse.json({ error: 'Invalid data format' }, { status: 400 });
-    }
-
-    // Update in database
-    const updatedLinks = await updateSpotifyLinks(links);
-    return NextResponse.json(updatedLinks);
-  } catch (error) {
-    console.error('Error saving Spotify links:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  // For now, return a message that updates are not supported
+  return NextResponse.json({ 
+    error: 'Updates are not currently supported. Data is read-only from local files.' 
+  }, { status: 501 });
 } 

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getSocialLinks } from '@/lib/db-service';
+import { getSocialLinks } from '@/lib/data-service';
 
 export async function GET() {
   try {

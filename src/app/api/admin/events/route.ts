@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { getEvents, updateEvents } from '@/lib/db-service';
+import { getEvents } from '@/lib/data-service';
 
 export async function GET() {
   const session = await getServerSession();
@@ -25,17 +25,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  try {
-    const events = await request.json();
-    
-    if (!Array.isArray(events)) {
-      return NextResponse.json({ error: 'Invalid data format' }, { status: 400 });
-    }
-
-    const updatedEvents = await updateEvents(events);
-    return NextResponse.json(updatedEvents);
-  } catch (error) {
-    console.error('Error saving events:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  // For now, return a message that updates are not supported
+  return NextResponse.json({ 
+    error: 'Updates are not currently supported. Data is read-only from local files.' 
+  }, { status: 501 });
 } 

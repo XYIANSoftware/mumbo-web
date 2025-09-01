@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { PageHeader } from '@/components/ui/PageHeader';
 import { EventCard } from '@/components/ui/EventCard';
 import { Event } from '@/types/content';
-import { getEvents } from '@/lib/db-service';
+import { getEvents } from '@/lib/data-service';
 
 export default function EventsPage() {
   const [events, setEvents] = useState<Event[]>([]);

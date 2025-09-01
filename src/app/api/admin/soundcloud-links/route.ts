@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
-import { getSoundCloudLinks, updateSoundCloudLinks } from '@/lib/db-service';
+import { getSoundCloudLinks } from '@/lib/data-service';
 
 export async function GET() {
   const session = await getServerSession();
@@ -25,17 +25,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  try {
-    const links = await request.json();
-    
-    if (!Array.isArray(links)) {
-      return NextResponse.json({ error: 'Invalid data format' }, { status: 400 });
-    }
-
-    const updatedLinks = await updateSoundCloudLinks(links);
-    return NextResponse.json(updatedLinks);
-  } catch (error) {
-    console.error('Error saving SoundCloud links:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+  // For now, return a message that updates are not supported
+  return NextResponse.json({ 
+    error: 'Updates are not currently supported. Data is read-only from local files.' 
+  }, { status: 501 });
 } 

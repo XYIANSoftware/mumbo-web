@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getSoundCloudLinks } from '@/lib/db-service';
+import { getSoundCloudLinks } from '@/lib/data-service';
 
 export async function GET() {
   try {

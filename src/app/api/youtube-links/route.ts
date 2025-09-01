@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getYouTubeLinks } from '@/lib/db-service';
+import { getYouTubeLinks } from '@/lib/data-service';
 
 export async function GET() {
   try {
