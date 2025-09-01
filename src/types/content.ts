@@ -25,7 +25,7 @@ export interface Event extends BaseContent {
 }
 
 export interface SocialLink extends BaseContent {
-  platform: 'INSTAGRAM' | 'TWITTER' | 'FACEBOOK' | 'TIKTOK' | 'YOUTUBE';
+  platform: 'INSTAGRAM' | 'TWITTER' | 'FACEBOOK' | 'TIKTOK' | 'YOUTUBE' | 'SPOTIFY' | 'SOUNDCLOUD';
   url: string;
   icon: string;
   username: string;

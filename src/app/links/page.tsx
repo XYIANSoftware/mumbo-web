@@ -114,89 +114,75 @@ export default function LinksPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
             >
-              <Button
-                onClick={() => window.open(link.url, '_blank')}
-                className="w-full p-button-outlined"
-              >
-                <div className="flex items-center justify-center gap-2">
-                  <i className={`pi pi-${link.platform.toLowerCase()}`}></i>
-                  <span>{link.title}</span>
-                </div>
-              </Button>
+                             <Button
+                 onClick={() => window.open(link.url, '_blank')}
+                 className="w-full p-button-outlined"
+               >
+                 <div className="flex items-center justify-center gap-2">
+                   <i className={`pi pi-${link.platform.toLowerCase()}`}></i>
+                   {link.platform !== 'SPOTIFY' && link.platform !== 'SOUNDCLOUD' && (
+                     <span>{link.title}</span>
+                   )}
+                 </div>
+               </Button>
             </motion.div>
           ))
         )}
       </motion.div>
 
-      {/* Music Links Accordion */}
-      <motion.div
-        className="w-full relative z-10"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.4 }}
-      >
-                 <Accordion activeIndex={[0]}>
-           {loading ? (
-             // Loading skeleton for music links
-             Array(3).fill(0).map((_, index) => (
-               <div key={index} className="animate-pulse bg-gray-700 rounded-lg h-16 mb-2" />
-             ))
-           ) : (
-             <>
-               <AccordionTab header={
-                 <div className="flex items-center gap-2">
-                   <FaSpotify className="text-[#1DB954] text-xl" />
-                   <span>Spotify Tracks ({spotifyLinks.length})</span>
-                 </div>
-               }>
-                 <div className="space-y-2">
-                   {spotifyLinks.length > 0 ? (
-                     spotifyLinks.map((link, index) => (
-                       <ContentCard key={link.id} link={link} index={index} />
-                     ))
-                   ) : (
-                     <p className="text-gray-400 text-center py-4">No Spotify tracks available</p>
-                   )}
-                 </div>
-               </AccordionTab>
+             {/* Music Links Accordion */}
+       <motion.div
+         className="w-full relative z-10"
+         initial={{ opacity: 0, y: 20 }}
+         animate={{ opacity: 1, y: 0 }}
+         transition={{ duration: 0.5, delay: 0.4 }}
+       >
+         <Accordion>
+           <AccordionTab header={
+             <div className="flex items-center gap-2">
+               <FaSpotify className="text-[#1DB954] text-xl" />
+               <span>Spotify Tracks</span>
+             </div>
+           }>
+             <div className="space-y-2">
+               {spotifyLinks.map((link) => (
+                 <Button
+                   key={link.title}
+                   onClick={() => window.open(link.url, '_blank')}
+                   className="w-full p-button-outlined mb-2"
+                 >
+                   <div className="flex items-center gap-3 py-2">
+                     <FaSpotify className="text-xl" />
+                     <span>{link.title}</span>
+                   </div>
+                 </Button>
+               ))}
+             </div>
+           </AccordionTab>
 
-               <AccordionTab header={
-                 <div className="flex items-center gap-2">
-                   <FaSoundcloud className="text-[#FF5500] text-xl" />
-                   <span>SoundCloud Tracks ({soundCloudLinks.length})</span>
-                 </div>
-               }>
-                 <div className="space-y-2">
-                   {soundCloudLinks.length > 0 ? (
-                     soundCloudLinks.map((link, index) => (
-                       <ContentCard key={link.id} link={link} index={index} />
-                     ))
-                   ) : (
-                     <p className="text-gray-400 text-center py-4">No SoundCloud tracks available</p>
-                   )}
-                 </div>
-               </AccordionTab>
-
-               <AccordionTab header={
-                 <div className="flex items-center gap-2">
-                   <FaYoutube className="text-[#FF0000] text-xl" />
-                   <span>YouTube Videos ({youtubeLinks.length})</span>
-                 </div>
-               }>
-                 <div className="space-y-2">
-                   {youtubeLinks.length > 0 ? (
-                     youtubeLinks.map((link, index) => (
-                       <ContentCard key={link.id} link={link} index={index} />
-                     ))
-                   ) : (
-                     <p className="text-gray-400 text-center py-4">No YouTube videos available</p>
-                   )}
-                 </div>
-               </AccordionTab>
-             </>
-           )}
+           <AccordionTab header={
+             <div className="flex items-center gap-2">
+               <FaSoundcloud className="text-[#FF5500] text-xl" />
+               <span>SoundCloud Tracks</span>
+             </div>
+           }>
+             <div className="space-y-2">
+               {soundCloudLinks.map((link) => (
+                 <Button
+                   key={link.title}
+                   onClick={() => window.open(link.url, '_blank')}
+                   className="w-full p-button-outlined mb-2"
+                 >
+                   <div className="flex items-center gap-3 py-2">
+                     <FaSoundcloud className="text-xl" />
+                     <span>{link.title}</span>
+                   </div>
+                 </Button>
+               ))}
+             </div>
+           </AccordionTab>
          </Accordion>
-      </motion.div>
+       </motion.div>
     </div>
   );
 } 
