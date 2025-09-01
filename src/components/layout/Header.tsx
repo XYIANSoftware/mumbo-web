@@ -14,6 +14,7 @@ const navItems = [
   { label: 'Gallery', path: '/gallery' },
   { label: 'Links', path: '/links' },
   { label: 'About', path: '/about' },
+  { label: 'Merch', path: '/merch' },
   // { label: 'Contact', path: '/contact' },
 ] as const;
 
