@@ -20,6 +20,8 @@ export function SocialLinksEditor() {
       { label: 'Facebook', value: 'FACEBOOK' },
       { label: 'TikTok', value: 'TIKTOK' },
       { label: 'YouTube', value: 'YOUTUBE' },
+      { label: 'Spotify', value: 'SPOTIFY' },
+      { label: 'SoundCloud', value: 'SOUNDCLOUD' },
     ]},
     { field: 'username', header: 'Username', type: 'text' as const },
   ];
@@ -30,6 +32,8 @@ export function SocialLinksEditor() {
     FACEBOOK: 'pi pi-facebook',
     TIKTOK: 'pi pi-video',
     YOUTUBE: 'pi pi-youtube',
+    SPOTIFY: 'pi pi-spotify',
+    SOUNDCLOUD: 'pi pi-cloud',
   };
 
   const emptyItem = (): SocialLink => ({
