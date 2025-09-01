@@ -1,30 +1,47 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
+import { Button } from 'primereact/button';
+import { Card } from '@/components/ui/Card';
 import { PageHeader } from '@/components/ui/PageHeader';
-import { EventCard } from '@/components/ui/EventCard';
-import { Event } from '@/types/content';
-import { getEvents } from '@/lib/data-service';
+import Link from 'next/link';
+
+interface Event {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+  imageUrl: string;
+  eventName: string;
+}
+
+const events: Event[] = [
+  {
+    id: '1',
+    title: 'Mumbo Jumbo Ep. 6: Bloom Debut',
+    date: 'Sunday, April 14, 2024',
+    time: '22:00',
+    location: 'Bloom Nightclub, Downtown',
+    description: 'Experience the latest episode of Mumbo Jumbo live! Featuring new tracks and special guests.',
+    imageUrl: '/images/mumbo-assets/2024_0906-Bloom_047.jpeg',
+    eventName: 'mumbo-jumbo-ep-6-bloom-debut'
+  },
+  {
+    id: '2',
+    title: 'Project Seismic Launch Party',
+    date: 'Tuesday, April 30, 2024',
+    time: '21:00',
+    location: 'Underground Bass Club',
+    description: 'Join us for the official launch of Project Seismic with special guest performances.',
+    imageUrl: '/images/mumbo-assets/M_B04855-1-NR.jpg',
+    eventName: 'project-seismic-launch-party'
+  }
+];
 
 export default function EventsPage() {
-  const [events, setEvents] = useState<Event[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function fetchEvents() {
-      try {
-        const eventData = await getEvents();
-        setEvents(eventData);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    fetchEvents();
-  }, []);
-
   return (
     <div className="container mx-auto px-4 py-12">
       <PageHeader
@@ -32,33 +49,65 @@ export default function EventsPage() {
         subtitle="Catch DJ Mumbo live in action"
       />
 
-      <div className="space-y-8">
-        {loading ? (
-          // Loading skeleton for events
-          Array(2).fill(0).map((_, index) => (
-            <div key={index} className="animate-pulse">
-              <div className="flex flex-col md:flex-row gap-6">
-                <div className="w-full md:w-1/3">
-                  <div className="bg-gray-700 rounded-lg aspect-video md:aspect-square" />
-                </div>
-                <div className="flex-1 space-y-4">
-                  <div className="h-8 bg-gray-700 rounded w-3/4" />
-                  <div className="flex flex-wrap gap-4">
-                    {Array(3).fill(0).map((_, i) => (
-                      <div key={i} className="h-6 bg-gray-700 rounded w-32" />
-                    ))}
+      <div className="space-y-12">
+        {events.map((event, index) => (
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <Card className="overflow-hidden">
+              <div className="flex flex-col lg:flex-row gap-8">
+                {/* Large Image Section (Left) */}
+                <div className="w-full lg:w-2/3">
+                  <div className="relative aspect-[4/3] lg:aspect-[3/2] rounded-lg overflow-hidden">
+                    <Image
+                      src={event.imageUrl}
+                      alt={event.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
-                  <div className="h-20 bg-gray-700 rounded" />
-                  <div className="h-10 bg-gray-700 rounded w-32" />
+                </div>
+
+                {/* Event Details Section (Right) */}
+                <div className="w-full lg:w-1/3 flex flex-col justify-center space-y-6">
+                  <div>
+                    <h2 className="text-3xl font-bold mb-4">{event.title}</h2>
+                    
+                    <div className="space-y-3 text-gray-300">
+                      <div className="flex items-center gap-3">
+                        <i className="pi pi-calendar text-primary-light"></i>
+                        <span>{event.date}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <i className="pi pi-clock text-primary-light"></i>
+                        <span>{event.time}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <i className="pi pi-map-marker text-primary-light"></i>
+                        <span>{event.location}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <p className="text-gray-400 leading-relaxed">
+                    {event.description}
+                  </p>
+
+                  <Link href={`/events/${event.eventName}`}>
+                    <Button
+                      label="Details"
+                      icon="pi pi-info-circle"
+                      className="p-button-rounded w-fit"
+                    />
+                  </Link>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          events.map((event, index) => (
-            <EventCard key={event.id} event={event} index={index} />
-          ))
-        )}
+            </Card>
+          </motion.div>
+        ))}
       </div>
     </div>
   );
