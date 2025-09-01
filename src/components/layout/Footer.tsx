@@ -15,13 +15,18 @@ const socialLinks = [
   },
   {
     label: 'YouTube',
-    url: 'https://youtube.com/djmumbo',
+    url: 'https://www.youtube.com/@DJMumbo',
     icon: 'pi pi-youtube'
   },
   {
     label: 'SoundCloud',
-    url: 'https://soundcloud.com/djmumbo',
+    url: 'https://soundcloud.com/mumbobeatz',
     icon: 'pi pi-cloud'
+  },
+  {
+    label: 'Facebook',
+    url: 'https://www.facebook.com/profile.php?id=61575874555012',
+    icon: 'pi pi-facebook'
   }
 ] as const;
 
@@ -57,9 +62,9 @@ export default function Footer() {
               <Link href="/about" className="text-gray-400 hover:text-primary-light transition-colors">
                 About
               </Link>
-              <Link href="/contact" className="text-gray-400 hover:text-primary-light transition-colors">
-                Contact
-              </Link>
+              <a href="mailto:mumbobeatz@gmail.com" className="text-gray-400 hover:text-primary-light transition-colors">
+                Book
+              </a>
             </nav>
           </div>
 

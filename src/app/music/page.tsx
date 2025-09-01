@@ -16,7 +16,7 @@ const tracks: Track[] = [
     title: "Feelin' Pretty Suavé",
     type: 'track',
     image: '/images/mumbo-assets/M_B04850-1-NR.jpg',
-    link: 'https://open.spotify.com/track/your-track-id'
+    link: 'https://open.spotify.com/track/26Sx99DCrKHnovO2snGyPu'
   },
   {
     title: 'Satellite (Mumbo Flip)',
