@@ -61,7 +61,7 @@ export default function AboutPage() {
             </div>
             <div className="flex justify-center mb-6">
               <img
-                src="/images/mumbo-assets/Mumbo Logo.png"
+                src="/images/mumbo-assets/Mumbo_Logo.png"
                 alt="Mumbo Logo"
                 className="h-24 w-auto"
               />
