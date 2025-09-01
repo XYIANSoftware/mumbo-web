@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { FaSpotify } from 'react-icons/fa';
 
 const socialLinks = [
   {
@@ -22,6 +23,11 @@ const socialLinks = [
     label: 'SoundCloud',
     url: 'https://soundcloud.com/mumbobeatz',
     icon: 'pi pi-cloud'
+  },
+  {
+    label: 'Spotify',
+    url: 'https://open.spotify.com/artist/your-spotify-id',
+    icon: 'custom-spotify'
   },
   {
     label: 'Facebook',
@@ -71,7 +77,7 @@ export default function Footer() {
           {/* Social Links */}
           <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-semibold text-white mb-4">Connect</h3>
-            <div className="flex gap-4">
+            <div className="flex gap-2">
               {socialLinks.map((link) => (
                 <a
                   key={link.label}
@@ -81,7 +87,13 @@ export default function Footer() {
                   className="text-gray-400 hover:text-primary-light transition-colors"
                   aria-label={link.label}
                 >
-                  <i className={`${link.icon} text-2xl`}></i>
+                  {link.icon === 'custom-spotify' ? (
+                    <span className="inline-flex items-center justify-center w-8 h-8">
+                      <FaSpotify className="text-4xl" />
+                    </span>
+                  ) : (
+                    <i className={`${link.icon} text-2xl`}></i>
+                  )}
                 </a>
               ))}
             </div>
