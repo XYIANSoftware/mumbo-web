@@ -1,8 +1,8 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+// import { useSession } from 'next-auth/react';
+// import { useRouter } from 'next/navigation';
+// import { useEffect } from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import { Panel } from 'primereact/panel';
 
@@ -15,27 +15,26 @@ import { SocialLinksEditor } from '@/components/admin/SocialLinksEditor';
 import { CommunityEditor } from '@/components/admin/CommunityEditor';
 
 export default function AdminDashboard() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  // const { data: session, status } = useSession();
+  // const router = useRouter();
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/admin/login');
-    } else if (status === 'authenticated' && !session?.user?.isAdmin) {
-      router.push('/admin/login');
-    }
-  }, [session, status, router]);
+  // useEffect(() => {
+  //   if (status === 'unauthenticated') {
+  //     router.push('/admin/login');
+  //   } else if (status === 'authenticated' && !session?.user?.isAdmin) {
+  //     router.push('/admin/login');
+  //   }
+  // }, [session, status, router]);
 
-  if (status === 'loading' || !session?.user?.isAdmin) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <i className="pi pi-spin pi-spinner text-4xl"></i>
-          <p className="mt-4">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  // if (status === 'loading' || !session?.user?.isAdmin) {
+  //   return (
+  //     <div className="flex min-h-screen items-center justify-center">
+  //       <div className="text-center">
+  //       <i className="pi pi-spin pi-spinner text-4xl"></i>
+  //       <p className="mt-4">Loading...</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="p-6">

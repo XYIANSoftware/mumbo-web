@@ -1,52 +1,52 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useSession, signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+// import { useEffect } from 'react';
+// import { useSession, signIn } from 'next-auth/react';
+// import { useRouter } from 'next/navigation';
 import { Button } from 'primereact/button';
 
 // Extend Session type to include our custom properties
-interface ExtendedSession {
-  user?: {
-    name?: string | null;
-    email?: string | null;
-    image?: string | null;
-    isAdmin: boolean;
-    login?: string;
-  };
-}
+// interface ExtendedSession {
+//   user?: {
+//     name?: string | null;
+//     email?: string | null;
+//     image?: string | null;
+//     isAdmin: boolean;
+//     login?: string;
+//   };
+// }
 
 export default function AdminLogin() {
-  const { data: session, status } = useSession() as { data: ExtendedSession | null; status: string };
-  const router = useRouter();
+  // const { data: session, status } = useSession() as { data: ExtendedSession | null; status: string };
+  // const router = useRouter();
 
-  useEffect(() => {
-    console.log('Session Status:', status);
-    console.log('Session Data:', session);
+  // useEffect(() => {
+  //   console.log('Session Status:', status);
+  //   console.log('Session Data:', session);
     
-    if (status === 'authenticated' && session?.user?.isAdmin) {
-      console.log('Redirecting to admin - user is admin');
-      router.push('/admin');
-    }
-  }, [session, status, router]);
+  //   if (status === 'authenticated' && session?.user?.isAdmin) {
+  //     console.log('Redirecting to admin - user is admin');
+  //     router.push('/admin');
+  //   }
+  // }, [session, status, router]);
 
-  if (status === 'loading') {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <i className="pi pi-spin pi-spinner text-4xl"></i>
-          <p className="mt-4">Loading...</p>
-        </div>
-      </div>
-    );
-  }
+  // if (status === 'loading') {
+  //   return (
+  //     <div className="flex min-h-screen items-center justify-center">
+  //       <div className="text-center">
+  //       <i className="pi pi-spin pi-spinner text-4xl"></i>
+  //       <p className="mt-4">Loading...</p>
+  //     </div>
+  //   </div>
+  //   );
+  // }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center p-4">
       <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-md">
         <h1 className="mb-6 text-center text-2xl font-bold">Admin Login</h1>
         
-        {status === 'authenticated' && !session?.user?.isAdmin ? (
+        {/* {status === 'authenticated' && !session?.user?.isAdmin ? (
           <div className="text-center">
             <p className="mb-4 text-red-500">
               Your account does not have admin privileges.
@@ -70,7 +70,11 @@ export default function AdminLogin() {
               className="p-button-primary w-full"
             />
           </div>
-        ) : null}
+        ) : null} */}
+        
+        <div className="text-center">
+          <p className="text-gray-600">Authentication temporarily disabled</p>
+        </div>
       </div>
     </div>
   );
