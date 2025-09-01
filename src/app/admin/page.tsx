@@ -40,7 +40,8 @@ export default function AdminDashboard() {
     <div className="p-6">
       <div className="mb-6">
         <h1 className="text-3xl font-bold">Admin Dashboard</h1>
-        <p className="text-gray-400">Welcome back, {session.user.name}</p>
+        {/* <p className="text-gray-400">Welcome back, {session.user.name}</p> */}
+        <p className="text-gray-400">Welcome to the Admin Dashboard</p>
       </div>
 
       <TabView>
