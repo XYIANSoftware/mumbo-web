@@ -30,7 +30,7 @@ export default function Home() {
         {/* Background Image */}
         <motion.div style={{ y: heroY }} className="absolute inset-0 z-0 h-full">
           <Image
-            src="/images/mumbo-bg-2.png"
+            src="/images/mumbo-assets/m_b06468.jpg"
             alt="Mumbo performing"
             fill
             className="object-cover object-center hidden md:block"

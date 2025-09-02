@@ -1,0 +1,4 @@
+id,created_at,updated_at,title,content,author,image_url
+290f1ee6-6c54-4b01-90e6-d701748f0866,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,New Album Announcement,Excited to announce my new album dropping next month!,XYIAN,https://example.com/images/album-announce.jpg
+290f1ee6-6c54-4b01-90e6-d701748f0867,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Studio Update,Working on some fresh beats in the studio today,XYIAN,https://example.com/images/studio-update.jpg
+290f1ee6-6c54-4b01-90e6-d701748f0868,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Tour Dates Coming Soon,Get ready for some big tour announcements coming your way!,XYIAN,https://example.com/images/tour-tease.jpg 

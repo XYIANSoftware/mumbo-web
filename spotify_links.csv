@@ -1,0 +1,4 @@
+id,created_at,updated_at,title,url,platform,type,image_url,description
+d290f1ee-6c54-4b01-90e6-d701748f0851,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Latest Album,https://open.spotify.com/album/example1,SPOTIFY,ALBUM,https://i.scdn.co/image/example1,My latest album release
+e290f1ee-6c54-4b01-90e6-d701748f0852,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Featured Track,https://open.spotify.com/track/example2,SPOTIFY,TRACK,https://i.scdn.co/image/example2,Check out my new single
+f290f1ee-6c54-4b01-90e6-d701748f0853,2024-04-03T00:00:00Z,2024-04-03T00:00:00Z,Best Of Playlist,https://open.spotify.com/playlist/example3,SPOTIFY,PLAYLIST,https://i.scdn.co/image/example3,A collection of my best tracks 

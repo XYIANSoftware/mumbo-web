@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "title": "Mumbo's Secret Stuff Vol. 1",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "MIX",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Emorfik 1/25: Mumbo Live Set!",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "MIX",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "title": "Mumbo Jumbo Episode 6",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "MIX",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "My Name Is (I like to Party)",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "TRACK",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Mumbo Jumbo",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "TRACK",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "6",
+    "title": "Berries & Cream",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "type": "TRACK",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  }
+] 

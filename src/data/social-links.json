@@ -1,0 +1,50 @@
+[
+  {
+    "id": "1",
+    "title": "Instagram",
+    "url": "https://instagram.com/mumbobeatz",
+    "platform": "INSTAGRAM",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "title": "Twitter",
+    "url": "https://twitter.com/mumbobeatz",
+    "platform": "TWITTER",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "title": "YouTube",
+    "url": "https://www.youtube.com/@DJMumbo",
+    "platform": "YOUTUBE",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Facebook",
+    "url": "https://www.facebook.com/profile.php?id=61575874555012",
+    "platform": "FACEBOOK",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Spotify",
+    "url": "https://open.spotify.com/artist/mumbobeatz",
+    "platform": "SPOTIFY",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  },
+  {
+    "id": "6",
+    "title": "SoundCloud",
+    "url": "https://soundcloud.com/mumbobeatz",
+    "platform": "SOUNDCLOUD",
+    "createdAt": "2024-04-03T00:00:00Z",
+    "updatedAt": "2024-04-03T00:00:00Z"
+  }
+] 
