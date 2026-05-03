@@ -1,5 +1,16 @@
 # Changelog
 
+## 2026-05-03 — List-driven content (const + map)
+
+- **Convention**: editable lists use **`UPPER_SNAKE_CASE`** exports (`HOME_FEATURE_CARDS`,
+  `MUSIC_PAGE_SONGS`, `MUSIC_PAGE_LIVE_SETS`, `MUSIC_CATALOG_SECTIONS`, `HIGHLIGHT_ITEMS`,
+  `LINKS_MAIN_PINNED`,
+  `LINK_GROUPS_FALLBACK`) with short file-level JSDoc — add/remove rows there; UI
+  components only **`map()`** over props or those imports.
+- **`HomeFeatureCards`** accepts optional **`items`** (defaults to `HOME_FEATURE_CARDS`).
+- **Links**: **`links-site-lists.ts`** + **`grouped-links.ts`**; **`mergeMainLinkList`** /
+  **`mergeGroupedLinks`** merge pinned + API + optional accordion fallbacks.
+
 ## 2026-05-03 — Page composition / reusable UI
 
 ### Component extraction

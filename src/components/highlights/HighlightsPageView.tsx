@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { PageHeader } from '@/components/ui/PageHeader'
 import {
 	getHighlightStripItems,
-	highlightItems,
+	HIGHLIGHT_ITEMS,
 } from './highlight-items-data'
 import { HighlightAlbumStrip } from './HighlightAlbumStrip'
 import { HighlightGridCard } from './HighlightGridCard'
@@ -17,7 +17,7 @@ export function HighlightsPageView() {
 	const [selectedItem, setSelectedItem] = useState<HighlightItem | null>(null)
 
 	const stripItems = useMemo(
-		() => getHighlightStripItems(highlightItems),
+		() => getHighlightStripItems(HIGHLIGHT_ITEMS),
 		[]
 	)
 
@@ -42,7 +42,7 @@ export function HighlightsPageView() {
 			</motion.section>
 
 			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
-				{highlightItems.map((item, index) => (
+				{HIGHLIGHT_ITEMS.map((item, index) => (
 					<HighlightGridCard
 						key={item.id}
 						item={item}

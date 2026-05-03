@@ -1,13 +1,16 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
-import { LINKS_PINNED_MAIN } from './links-pinned-data'
+import type { GroupedLinks } from './grouped-links'
 import { LinksCategorizedAccordion } from './LinksCategorizedAccordion'
-import type { GroupedLinks } from './LinksCategorizedAccordion'
 import { LinksDecorativeBackdrop } from './LinksDecorativeBackdrop'
 import { LinksLoadingSkeleton } from './LinksLoadingSkeleton'
 import { LinksMainGrid } from './LinksMainGrid'
 import { LinksProfileHero } from './LinksProfileHero'
+import {
+	mergeGroupedLinks,
+	mergeMainLinkList,
+} from './links-site-lists'
 
 export function LinksPageView() {
 	const [links, setLinks] = useState<GroupedLinks>({})
@@ -29,12 +32,15 @@ export function LinksPageView() {
 		fetchLinks()
 	}, [])
 
-	const mainLinksGrid = useMemo(() => {
-		const rest = links.main ?? []
-		return [...LINKS_PINNED_MAIN, ...rest].sort(
-			(a, b) => a.sort_order - b.sort_order
-		)
-	}, [links.main])
+	const mainLinksGrid = useMemo(
+		() => mergeMainLinkList(links.main),
+		[links.main]
+	)
+
+	const groupedLinks = useMemo(
+		() => mergeGroupedLinks(links),
+		[links]
+	)
 
 	return (
 		<div className='min-h-screen flex flex-col items-center px-4 py-4 max-w-6xl mx-auto relative overflow-hidden'>
@@ -46,7 +52,7 @@ export function LinksPageView() {
 			) : (
 				<>
 					<LinksMainGrid links={mainLinksGrid} />
-					<LinksCategorizedAccordion links={links} />
+					<LinksCategorizedAccordion links={groupedLinks} />
 				</>
 			)}
 		</div>

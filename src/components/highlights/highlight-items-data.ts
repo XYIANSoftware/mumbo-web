@@ -1,7 +1,11 @@
 import type { HighlightItem } from './highlight-model'
 import { SAMPLE_INSTAGRAM_HIGHLIGHT } from './highlight-model'
 
-export const highlightItems: HighlightItem[] = [
+/**
+ * Highlights page grid + strip — add/edit rows here. Rendered with `map()` in
+ * `HighlightsPageView` and related components.
+ */
+export const HIGHLIGHT_ITEMS: HighlightItem[] = [
 	{
 		id: 'ig-sample',
 		title: 'Featured story highlight',
@@ -69,6 +73,9 @@ export const highlightItems: HighlightItem[] = [
 	},
 ]
 
+/** Row IDs excluded from the horizontal album strip (e.g. promos). */
+const HIGHLIGHT_STRIP_EXCLUDE_IDS = new Set(['ig-sample'])
+
 export function getHighlightStripItems(items: HighlightItem[]) {
-	return items.filter(i => i.id !== 'ig-sample')
+	return items.filter(i => !HIGHLIGHT_STRIP_EXCLUDE_IDS.has(i.id))
 }

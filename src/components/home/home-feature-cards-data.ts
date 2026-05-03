@@ -1,6 +1,10 @@
+/**
+ * Home page feature cards — edit this list to add, remove, or reorder cards.
+ * Each entry is rendered via `HomeFeatureCard` inside `HomeFeatureCards`.
+ */
 import type { HomeFeatureCardProps } from './HomeFeatureCard'
 
-export const homeFeatureCards: HomeFeatureCardProps[] = [
+export const HOME_FEATURE_CARDS: HomeFeatureCardProps[] = [
 	{
 		href: '/music',
 		icon: 'pi pi-music',

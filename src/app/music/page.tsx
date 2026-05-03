@@ -1,11 +1,9 @@
 'use client'
 
+import { Fragment } from 'react'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { MusicCatalogSection } from '@/components/music/MusicCatalogSection'
-import {
-	musicPageLiveSets,
-	musicPageSongs,
-} from '@/components/music/music-page-data'
+import { MUSIC_CATALOG_SECTIONS } from '@/components/music/music-page-data'
 import { Divider } from 'primereact/divider'
 
 export default function MusicPage() {
@@ -16,23 +14,14 @@ export default function MusicPage() {
 				subtitle='Tracks, flips, and live sets — pick your platform'
 			/>
 
-			<div className='mb-12'>
-				<MusicCatalogSection
-					title='Songs'
-					description='Originals and flips — tap a card for the main link, or use the circles for Spotify, Apple Music, or SoundCloud.'
-					items={musicPageSongs}
-				/>
-			</div>
-
-			<Divider />
-
-			<div className='mt-12'>
-				<MusicCatalogSection
-					title='Live sets / mixes'
-					description='Full recordings are on SoundCloud; select sets also have YouTube.'
-					items={musicPageLiveSets}
-				/>
-			</div>
+			{MUSIC_CATALOG_SECTIONS.map((section, index) => (
+				<Fragment key={section.title}>
+					{index > 0 && <Divider />}
+					<div className={index === 0 ? 'mb-12' : 'mt-12'}>
+						<MusicCatalogSection {...section} />
+					</div>
+				</Fragment>
+			))}
 		</div>
 	)
 }

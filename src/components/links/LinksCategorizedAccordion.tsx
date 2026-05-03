@@ -4,11 +4,8 @@ import { motion } from 'framer-motion'
 import { Link } from '@/types/content'
 import { Accordion, AccordionTab } from 'primereact/accordion'
 import { Button } from 'primereact/button'
+import type { GroupedLinks } from './grouped-links'
 import { LinksPlatformIcon } from './links-platform-icon'
-
-export interface GroupedLinks {
-	[key: string]: Link[]
-}
 
 function formatCategory(category: string) {
 	return category
