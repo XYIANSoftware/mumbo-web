@@ -1,7 +1,16 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { isSupabaseConfigured } from '@/lib/supabase-config'
 
 export async function proxy(request: NextRequest) {
+	if (!isSupabaseConfigured()) {
+		return NextResponse.next({
+			request: {
+				headers: request.headers,
+			},
+		})
+	}
+
 	let response = NextResponse.next({
 		request: {
 			headers: request.headers,

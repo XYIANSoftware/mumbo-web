@@ -4,9 +4,8 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { Button } from 'primereact/button'
 import Link from 'next/link'
 import Image from 'next/image'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import { Skeleton } from '@/components/ui/Skeleton'
-import { testSupabaseConnection } from '@/lib/supabase'
 
 export default function Home() {
 	const heroRef = useRef<HTMLDivElement>(null)
@@ -15,11 +14,6 @@ export default function Home() {
 	const [profileImageLoaded, setProfileImageLoaded] = useState(false)
 	const [parallaxImageLoaded, setParallaxImageLoaded] = useState(false)
 	const [aboutImageLoaded, setAboutImageLoaded] = useState(false)
-
-	useEffect(() => {
-		// Test Supabase connection on page load
-		testSupabaseConnection()
-	}, [])
 
 	const { scrollYProgress: heroScroll } = useScroll({
 		target: heroRef,

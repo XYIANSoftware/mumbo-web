@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
+import { readTableJson } from '@/lib/data-service'
 import { checkAdminAuth } from '@/lib/api-auth'
-import { supabase } from '@/lib/supabase'
+import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 import type { MusicLink } from '@/types/music'
 
 export async function GET() {
+	if (!isSupabaseConfigured()) {
+		const data = (await readTableJson<MusicLink>('spotify_links'))
+			.slice()
+			.sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+		return NextResponse.json({ data })
+	}
 	try {
 		const { data, error } = await supabase
 			.from('music_links')

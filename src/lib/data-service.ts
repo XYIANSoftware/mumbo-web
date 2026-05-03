@@ -4,9 +4,29 @@ import { BaseContent } from '@/types/content'
 
 const DATA_DIR = path.join(process.cwd(), 'src', 'data')
 
-export async function readData<T extends BaseContent>(
-	filename: string
-): Promise<T[]> {
+/** JSON files under `src/data` keyed by legacy Supabase table name. */
+const TABLE_JSON_FILES: Record<string, string> = {
+	community_posts: 'community-posts.json',
+	events: 'events.json',
+	social_links: 'social-links.json',
+	soundcloud_links: 'soundcloud-links.json',
+	spotify_links: 'spotify-links.json',
+	youtube_links: 'youtube-links.json',
+}
+
+export async function readTableJson<T = BaseContent>(table: string): Promise<T[]> {
+	const filename = TABLE_JSON_FILES[table]
+	if (!filename) return []
+	return readData<T>(filename)
+}
+
+export async function writeTableJson<T>(table: string, items: T[]): Promise<boolean> {
+	const filename = TABLE_JSON_FILES[table]
+	if (!filename) return false
+	return writeData<T>(filename, items)
+}
+
+export async function readData<T>(filename: string): Promise<T[]> {
 	const filePath = path.join(DATA_DIR, filename)
 	try {
 		const data = await fs.readFile(filePath, 'utf-8')
@@ -17,10 +37,7 @@ export async function readData<T extends BaseContent>(
 	}
 }
 
-export async function writeData<T extends BaseContent>(
-	filename: string,
-	data: T[]
-): Promise<boolean> {
+export async function writeData<T>(filename: string, data: T[]): Promise<boolean> {
 	const filePath = path.join(DATA_DIR, filename)
 	try {
 		await fs.writeFile(filePath, JSON.stringify(data, null, 2))

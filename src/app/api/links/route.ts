@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server'
+import { isSupabaseConfigured } from '@/lib/supabase'
 import { createClient } from '@/utils/supabase/server'
 import { Link } from '@/types/content'
 
 export async function GET() {
 	try {
+		if (!isSupabaseConfigured()) {
+			return NextResponse.json({})
+		}
+
 		console.log('Creating Supabase client...')
 		const supabase = await createClient()
 		

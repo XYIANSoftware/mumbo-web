@@ -1,11 +1,15 @@
 'use client'
 
 import { createBrowserClient } from '@supabase/ssr'
+import {
+	resolveSupabaseAnonKey,
+	resolveSupabaseUrl,
+} from '@/lib/supabase-config'
 
 export async function signIn(email: string, password: string) {
 	const supabase = createBrowserClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+		resolveSupabaseUrl(),
+		resolveSupabaseAnonKey()
 	)
 
 	const { data, error } = await supabase.auth.signInWithPassword({
@@ -18,8 +22,8 @@ export async function signIn(email: string, password: string) {
 
 export async function signOut() {
 	const supabase = createBrowserClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+		resolveSupabaseUrl(),
+		resolveSupabaseAnonKey()
 	)
 
 	const { error } = await supabase.auth.signOut()

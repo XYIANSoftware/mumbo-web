@@ -1,4 +1,5 @@
-import { supabase } from './supabase'
+import { readTableJson, writeTableJson } from '@/lib/data-service'
+import { supabase, isSupabaseConfigured } from './supabase'
 import { MusicLink, Event, SocialLink, CommunityPost } from '@/types/content'
 
 interface BaseRecord {
@@ -15,6 +16,9 @@ interface BaseRecord {
 
 // Validate database connection
 async function validateConnection() {
+	if (!isSupabaseConfigured()) {
+		return true
+	}
 	try {
 		const { error } = await supabase.from('spotify_links').select('count')
 		if (error) throw error
@@ -30,6 +34,10 @@ async function validateConnection() {
 
 // Generic function to fetch data from a table
 async function fetchData<T extends BaseRecord>(table: string): Promise<T[]> {
+	if (!isSupabaseConfigured()) {
+		return readTableJson<T>(table)
+	}
+
 	await validateConnection()
 
 	const { data, error } = await supabase
@@ -63,6 +71,14 @@ async function updateData<T extends BaseRecord>(
 	table: string,
 	items: T[]
 ): Promise<T[]> {
+	if (!isSupabaseConfigured()) {
+		const ok = await writeTableJson(table, items)
+		if (!ok) {
+			throw new Error(`Failed to write local data for ${table}`)
+		}
+		return items
+	}
+
 	// First, delete all existing records
 	const { error: deleteError } = await supabase
 		.from(table)

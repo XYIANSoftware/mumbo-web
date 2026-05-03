@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-05-02 — Build without Supabase (Netlify-safe)
+
+### Data / config
+
+- **`src/lib/supabase-config.ts`**: trim-aware **`isSupabaseConfigured`**, URL/key
+  **resolvers**, and documented fallbacks so **`createClient` never sees an empty
+  URL** (empty env strings are common in CI; `??` alone is not enough).
+- **`src/lib/supabase.ts`**: no import-time throws; **`testSupabaseConnection`**
+  no-ops when not configured.
+- **`src/lib/data-service.ts`**: **`readTableJson`** / **`writeTableJson`** map
+  legacy table names to **`src/data/*.json`**.
+- **`src/lib/db-service.ts`**: when Supabase is not configured, read/write those
+  JSON files instead of the network.
+- **Admin API GET** handlers: return JSON from disk when not configured (sorted
+  where the DB used **`sort_order`**).
+- **`src/app/api/events/route.ts`** / **`src/app/api/links/route.ts`**: offline
+  paths (events from **`events.json`**; links returns **`{}`**).
+- **`src/app/api/spotify-links/route.ts`**: removed redundant Supabase ping
+  before **`getSpotifyLinks`**.
+- **`src/app/page.tsx`**: removed home-page Supabase connection **`useEffect`**.
+- **`src/proxy.ts`**: skips Supabase session refresh when not configured.
+- **`src/utils/supabase/server.ts`**, **`client.ts`**, **`lib/api-auth.ts`**,
+  **`lib/auth.ts`**, **`app/lib/auth-client.ts`**, **`AuthProvider`**: use shared
+  URL/key resolvers.
+
 ## 2026-05-02 — Major stack (latest majors)
 
 ### Runtime
