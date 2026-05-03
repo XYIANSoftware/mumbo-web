@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-05-03 — List-driven content (const + map)
+
+- **Convention**: editable lists use **`UPPER_SNAKE_CASE`** exports (`HOME_FEATURE_CARDS`,
+  `MUSIC_PAGE_SONGS`, `MUSIC_PAGE_LIVE_SETS`, `MUSIC_CATALOG_SECTIONS`, `HIGHLIGHT_ITEMS`,
+  `LINKS_MAIN_PINNED`,
+  `LINK_GROUPS_FALLBACK`) with short file-level JSDoc — add/remove rows there; UI
+  components only **`map()`** over props or those imports.
+- **`HomeFeatureCards`** accepts optional **`items`** (defaults to `HOME_FEATURE_CARDS`).
+- **Links**: **`links-site-lists.ts`** + **`grouped-links.ts`**; **`mergeMainLinkList`** /
+  **`mergeGroupedLinks`** merge pinned + API + optional accordion fallbacks.
+
+## 2026-05-03 — Page composition / reusable UI
+
+### Component extraction
+
+- **Home** (`src/app/page.tsx`): thin shell; **`HomeHero`**, **`HomeFeaturedSection`**,
+  **`HomeManInTheHat`**, **`HomeFeatureCards`**, **`HomeFeatureCard`**, plus
+  **`home-feature-cards-data`** under **`src/components/home/`**.
+- **Music** (`src/app/music/page.tsx`): **`MusicCatalogSection`**, **`MusicReleaseGrid`**,
+  **`MusicReleaseCard`**, **`MusicPlatformBubbles`**, **`music-page-data`**,
+  **`music-platform-meta`**, **`music-types`** under **`src/components/music/`**.
+- **Highlights** (`src/app/highlights/page.tsx`): **`HighlightsPageView`** composes
+  **`HighlightInstagramPromoCard`**, **`HighlightAlbumStrip`**, **`HighlightGridCard`**,
+  **`HighlightCardMedia`**, **`HighlightViewerDialog`**, and data/model modules under
+  **`src/components/highlights/`**.
+- **Events** (`src/app/events/page.tsx`): **`EventsListSkeleton`**, **`EventsSections`**
+  under **`src/components/events/`**.
+- **Links / Socials** (`src/app/links/page.tsx`): **`LinksPageView`** with backdrop,
+  profile hero, main grid, accordion, skeleton, platform icons, and pinned link data
+  under **`src/components/links/`**. Main link grid correctly merges **pinned** Apple
+  Music + TikTok with API **`main`** links.
+
 ## 2026-05-02 — Build without Supabase (Netlify-safe)
 
 ### Data / config

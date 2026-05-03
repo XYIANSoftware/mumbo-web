@@ -65,6 +65,12 @@ export default function Footer() {
 								Music
 							</Link>
 							<Link
+								href='/highlights'
+								className='text-gray-400 hover:text-primary-light transition-colors'
+							>
+								Highlights
+							</Link>
+							<Link
 								href='/about'
 								className='text-gray-400 hover:text-primary-light transition-colors'
 							>
