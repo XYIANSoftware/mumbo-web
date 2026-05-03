@@ -2,10 +2,34 @@ import { Link } from '@/types/content'
 import type { GroupedLinks } from './grouped-links'
 
 /**
- * Pinned “main” tiles on `/links` (Socials). Shown first, then merged with
- * `links.main` from the API. Edit this array to add/remove pinned platforms.
+ * Pinned “main” tiles on `/socials`. Shown first, then merged with `links.main`
+ * from the API. Edit this array to add/remove pinned platforms.
  */
 export const LINKS_MAIN_PINNED: Link[] = [
+	{
+		id: 'pinned-spotify',
+		title: 'Spotify',
+		description: 'Stream on Spotify',
+		url: 'https://open.spotify.com/artist/0v4RYCckfkFu4dXWl35BXl?si=ygimJ6ejQfC4RkT7r5ZWHA',
+		category: 'main',
+		type: 'social',
+		platform: 'SPOTIFY',
+		sort_order: -4,
+		created_at: '',
+		updated_at: '',
+	},
+	{
+		id: 'pinned-soundcloud',
+		title: 'SoundCloud',
+		description: 'All tracks & mixes',
+		url: 'https://soundcloud.com/mumbobeatz',
+		category: 'main',
+		type: 'social',
+		platform: 'SOUNDCLOUD',
+		sort_order: -3,
+		created_at: '',
+		updated_at: '',
+	},
 	{
 		id: 'pinned-apple-music',
 		title: 'Apple Music',

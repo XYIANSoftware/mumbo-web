@@ -3,9 +3,12 @@ const config = {
 	async redirects() {
 		return [
 			{ source: '/gallery', destination: '/highlights', permanent: true },
+			{ source: '/links', destination: '/socials', permanent: true },
 		]
 	},
 	images: {
+		// Next 16 defaults to qualities: [75]; declare any `quality` used in <Image />.
+		qualities: [75, 90, 100],
 		remotePatterns: [
 			{
 				protocol: 'https',

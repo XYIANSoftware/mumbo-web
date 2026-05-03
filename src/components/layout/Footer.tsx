@@ -71,6 +71,12 @@ export default function Footer() {
 								Highlights
 							</Link>
 							<Link
+								href='/socials'
+								className='text-gray-400 hover:text-primary-light transition-colors'
+							>
+								Socials
+							</Link>
+							<Link
 								href='/about'
 								className='text-gray-400 hover:text-primary-light transition-colors'
 							>

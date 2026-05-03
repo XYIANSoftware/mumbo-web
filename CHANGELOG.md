@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-05-03 — Socials route + pinned Spotify / SoundCloud
+
+- **Route**: **`/socials`** replaces **`/links`** for the Socials page; **`/links`** → **`/socials`**
+  redirect in **`next.config.mjs`**. Header, **`NAVIGATION`**, and Footer quick link updated.
+- **`LINKS_MAIN_PINNED`**: restored **Spotify** and **SoundCloud** (with **mumbobeatz** SoundCloud URL;
+  Spotify uses search until a canonical artist URL is set).
+
+## 2026-05-03 — Dev console noise (Next Image + layout)
+
+- **`next.config.mjs`**: **`images.qualities`** `[75, 90, 100]` so `<Image quality={90|100}>` matches
+  Next 16 defaults (stops “unconfigured qualities” warnings).
+- **`ClientLayout`**: **`main`** gets **`relative`** so Framer **`useScroll`** offset math has a
+  non-static ancestor (reduces “container position” warnings).
+
 ## 2026-05-03 — List-driven content (const + map)
 
 - **Convention**: editable lists use **`UPPER_SNAKE_CASE`** exports (`HOME_FEATURE_CARDS`,

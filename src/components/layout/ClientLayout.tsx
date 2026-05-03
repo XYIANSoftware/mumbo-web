@@ -12,7 +12,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 	return (
 		<PrimeReactProvider value={{ unstyled: false, pt: {} }}>
 			<Header />
-			<main className='grow'>{children}</main>
+			<main className='relative grow'>{children}</main>
 			<Footer />
 		</PrimeReactProvider>
 	)
