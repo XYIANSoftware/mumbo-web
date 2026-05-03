@@ -47,13 +47,13 @@ export async function GET() {
 				created_at?: string | null
 				updated_at?: string | null
 			}>('events.json')
-			const data = (rows || []).filter(
-				e => (e.status ?? 'UPCOMING') === 'UPCOMING'
-			)
-			const formattedData = data.map(event => {
+			const formattedData = (rows || []).map(event => {
 				const cleanedImageUrl = cleanImageUrl(event.image_url)
+				const stableId =
+					event.id ??
+					`local-${event.date}-${event.title}`.replace(/\s+/g, '-')
 				return {
-					id: event.id,
+					id: stableId,
 					title: event.title,
 					description: event.description,
 					date: event.date,
@@ -63,7 +63,10 @@ export async function GET() {
 					image_path: cleanedImageUrl,
 					ticket_url: event.ticket_url ?? undefined,
 					price: event.price ?? undefined,
-					status: event.status,
+					status: (event.status ?? 'UPCOMING') as
+						| 'UPCOMING'
+						| 'PAST'
+						| 'CANCELLED',
 					sort_order: event.sort_order ?? undefined,
 					created_at: event.created_at ?? undefined,
 					updated_at: event.updated_at ?? undefined,
@@ -80,7 +83,6 @@ export async function GET() {
 			.from('events')
 			.select('*')
 			.order('date', { ascending: true })
-			.eq('status', 'UPCOMING')
 
 		if (error) {
 			console.error('Supabase query error:', error)
@@ -97,13 +99,12 @@ export async function GET() {
 		// Convert snake_case to camelCase for frontend and clean image URLs
 		const formattedData = data.map(event => {
 			const cleanedImageUrl = cleanImageUrl(event.image_url)
-			console.log(`Cleaned image URL for ${event.title}:`, {
-				original: event.image_url,
-				cleaned: cleanedImageUrl
-			})
+			const stableId =
+				event.id ??
+				`local-${event.date}-${event.title}`.replace(/\s+/g, '-')
 
 			return {
-				id: event.id,
+				id: stableId,
 				title: event.title,
 				description: event.description,
 				date: event.date,
