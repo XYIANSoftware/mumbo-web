@@ -15,7 +15,7 @@ A vibrant and interactive web application for DJ Mumbo, featuring a unique blend
 ## 🛠 Tech Stack
 
 - **Framework**: Next.js with TypeScript
-- **Styling**: 
+- **Styling**:
   - PrimeReact Components
   - PrimeFlex for layout
   - PrimeIcons
@@ -57,6 +57,7 @@ npm start
 ## 🌐 SEO
 
 The application is built with SEO best practices, optimizing for keywords related to:
+
 - DJ Mumbo
 - EDM Music
 - Electronic Dance Music

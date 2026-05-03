@@ -1,133 +1,245 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@config '../../tailwind.config.ts';
 
 :root {
-  /* Theme Colors */
-  --primary-main: #6366F1;
-  --primary-light: #818CF8;
-  --primary-dark: #4F46E5;
-  
-  --secondary-main: #EC4899;
-  --secondary-light: #F472B6;
-  --secondary-dark: #DB2777;
-  
-  --accent-main: #8B5CF6;
-  --accent-light: #A78BFA;
-  --accent-dark: #7C3AED;
-  
-  --background-primary: #0F172A;
-  --background-secondary: #1E293B;
-  --background-paper: #334155;
-  
-  /* Text Colors */
-  --text-primary: #F8FAFC;
-  --text-secondary: #CBD5E1;
-  --text-disabled: #64748B;
+	/* Use PrimeReact theme variables */
+	--background-primary: var(--surface-ground);
+	--background-secondary: var(--surface-card);
+	--background-paper: var(--surface-section);
+	--text-primary: var(--text-color);
+	--text-secondary: var(--text-color-secondary);
+	--text-disabled: var(--text-color-disabled);
 }
 
 /* Base Styles */
 body {
-  color: var(--text-primary);
-  background-color: var(--background-primary);
-  font-family: var(--font-inter);
+	color: var(--text-color);
+	background-color: var(--surface-ground);
+	font-family: var(--font-family);
+	position: relative;
+	min-height: 100vh;
+	overflow-x: hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-poppins);
+/* Global background blur effect */
+body::before,
+body::after {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+}
+
+/* Background base layer */
+body::before {
+	background: radial-gradient(
+			80% 80% at 50% 50%,
+			var(--primary-color) 0%,
+			transparent 100%
+		),
+		radial-gradient(50% 50% at 0% 0%, var(--primary-color) 0%, transparent 70%),
+		radial-gradient(
+			50% 50% at 100% 100%,
+			var(--primary-color) 0%,
+			transparent 70%
+		);
+	opacity: 0.15;
+	filter: blur(60px);
+	mix-blend-mode: soft-light;
+	transform-origin: center;
+	animation: pulse 15s ease-in-out infinite alternate;
+}
+
+/* Animated overlay */
+body::after {
+	background: radial-gradient(
+			70% 70% at 50% 50%,
+			var(--primary-color) 0%,
+			transparent 100%
+		),
+		radial-gradient(
+			40% 40% at 100% 0%,
+			var(--primary-color) 0%,
+			transparent 60%
+		),
+		radial-gradient(
+			40% 40% at 0% 100%,
+			var(--primary-color) 0%,
+			transparent 60%
+		);
+	opacity: 0.1;
+	filter: blur(90px);
+	mix-blend-mode: overlay;
+	animation: float 20s ease-in-out infinite alternate;
+}
+
+/* Ensure content stays above the blur */
+#__next,
+main {
+	position: relative;
+	z-index: 1;
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: var(--primary-color);
+	font-family: var(--font-family);
 }
 
 .font-display {
-  font-family: var(--font-space-grotesk);
+	font-family: var(--font-family);
 }
 
-/* PrimeReact Theme Overrides */
+/* PrimeReact Basic Layout Overrides - Only keep non-theme related styles */
 .p-component {
-  font-family: var(--font-inter) !important;
-}
-
-.p-button {
-  background: var(--primary-main);
-  border-color: var(--primary-main);
-}
-
-.p-button:hover {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
-}
-
-.p-button.p-button-outlined {
-  color: var(--primary-light);
-  border-color: var(--primary-light);
-  background: transparent;
-}
-
-.p-button.p-button-outlined:hover {
-  background: rgba(99, 102, 241, 0.1);
+	font-family: var(--font-family) !important;
 }
 
 /* Add padding for rounded buttons */
+.p-button {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+}
+
 .p-button.p-button-rounded {
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
+	padding-left: 2rem !important;
+	padding-right: 2rem !important;
 }
 
 .p-button.p-button-rounded.p-button-lg {
-  padding-left: 2.5rem !important;
-  padding-right: 2.5rem !important;
+	padding-left: 2.5rem !important;
+	padding-right: 2.5rem !important;
 }
 
 .p-menubar {
-  background: transparent;
-  border: none;
-  padding: 1rem 0;
+	background: transparent;
+	border: none;
+	padding: 1rem 0;
 }
 
 .p-menubar .p-menuitem-link {
-  padding: 0.75rem 1.25rem;
+	padding: 0.75rem 1.25rem;
 }
 
 .p-sidebar {
-  background: var(--background-secondary);
-  color: var(--text-primary);
+	background: var(--surface-overlay);
 }
 
 /* Custom Animations */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
+@keyframes pulse {
+	0% {
+		transform: scale(1);
+		filter: blur(60px);
+	}
+	50% {
+		transform: scale(1.2);
+		filter: blur(90px);
+	}
+	100% {
+		transform: scale(1);
+		filter: blur(60px);
+	}
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+@keyframes float {
+	0% {
+		transform: translateY(0) translateX(0);
+		filter: blur(90px);
+	}
+	33% {
+		transform: translateY(-3%) translateX(3%);
+		filter: blur(120px);
+	}
+	66% {
+		transform: translateY(3%) translateX(-3%);
+		filter: blur(90px);
+	}
+	100% {
+		transform: translateY(0) translateX(0);
+		filter: blur(120px);
+	}
 }
 
 /* Custom Utilities */
 .text-gradient {
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
 }
 
 /* Easter Egg Animation */
 .easter-egg {
-  position: relative;
-  cursor: pointer;
+	position: relative;
+	cursor: pointer;
 }
 
 .easter-egg::after {
-  content: '🎵';
-  position: absolute;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
+	content: '🎵';
+	position: absolute;
+	opacity: 0;
+	transform: translateY(10px);
+	transition: all 0.3s ease;
 }
 
 .easter-egg:hover::after {
-  opacity: 1;
-  transform: translateY(0);
+	opacity: 1;
+	transform: translateY(0);
+}
+
+/* Theme-aware text colors */
+.text-color-primary {
+	color: var(--primary-color);
+}
+
+.text-color-secondary {
+	color: var(--text-color-secondary);
+}
+
+.text-color-success {
+	color: var(--green-500);
+}
+
+.text-color-info {
+	color: var(--blue-500);
+}
+
+.text-color-warning {
+	color: var(--yellow-500);
+}
+
+.text-color-help {
+	color: var(--help-text-color);
+}
+
+/* Theme-aware backgrounds */
+.bg-surface-ground {
+	background-color: var(--surface-ground);
+}
+
+.bg-surface-card {
+	background-color: var(--surface-card);
+}
+
+.bg-surface-section {
+	background-color: var(--surface-section);
+}
+
+.bg-surface-overlay {
+	background-color: var(--surface-overlay);
+}
+
+.bg-surface-border {
+	background-color: var(--surface-border);
+}
+
+/* Theme-aware shadows */
+.shadow-card {
+	box-shadow: var(--card-shadow);
 }

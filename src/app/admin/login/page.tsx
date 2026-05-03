@@ -1,81 +1,85 @@
-'use client';
+'use client'
 
-// import { useEffect } from 'react';
-// import { useSession, signIn } from 'next-auth/react';
-// import { useRouter } from 'next/navigation';
-import { Button } from 'primereact/button';
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Card } from 'primereact/card'
+import { InputText } from 'primereact/inputtext'
+import { Password } from 'primereact/password'
+import { Button } from 'primereact/button'
+import { Toast } from 'primereact/toast'
+import { useRef } from 'react'
+import { createClient } from '@/utils/supabase/client'
 
-// Extend Session type to include our custom properties
-// interface ExtendedSession {
-//   user?: {
-//     name?: string | null;
-//     email?: string | null;
-//     image?: string | null;
-//     isAdmin: boolean;
-//     login?: string;
-//   };
-// }
+export default function LoginPage() {
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [loading, setLoading] = useState(false)
+	const router = useRouter()
+	const toast = useRef<Toast>(null)
 
-export default function AdminLogin() {
-  // const { data: session, status } = useSession() as { data: ExtendedSession | null; status: string };
-  // const router = useRouter();
+	const handleLogin = async (e: React.FormEvent) => {
+		e.preventDefault()
+		setLoading(true)
 
-  // useEffect(() => {
-  //   console.log('Session Status:', status);
-  //   console.log('Session Data:', session);
-    
-  //   if (status === 'authenticated' && session?.user?.isAdmin) {
-  //     console.log('Redirecting to admin - user is admin');
-  //     router.push('/admin');
-  //   }
-  // }, [session, status, router]);
+		try {
+			const supabase = createClient()
+			const { error } = await supabase.auth.signInWithPassword({
+				email,
+				password,
+			})
 
-  // if (status === 'loading') {
-  //   return (
-  //     <div className="flex min-h-screen items-center justify-center">
-  //       <div className="text-center">
-  //       <i className="pi pi-spin pi-spinner text-4xl"></i>
-  //       <p className="mt-4">Loading...</p>
-  //     </div>
-  //   </div>
-  //   );
-  // }
+			if (error) {
+				throw error
+			}
 
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-md">
-        <h1 className="mb-6 text-center text-2xl font-bold">Admin Login</h1>
-        
-        {/* {status === 'authenticated' && !session?.user?.isAdmin ? (
-          <div className="text-center">
-            <p className="mb-4 text-red-500">
-              Your account does not have admin privileges.
-            </p>
-            <p className="text-sm text-gray-600">
-              Current user: {session?.user?.name} ({session?.user?.login})
-            </p>
-            <p className="mt-4 text-sm text-gray-600">
-              Please contact the site administrator if you believe this is an error.
-            </p>
-          </div>
-        ) : status === 'unauthenticated' ? (
-          <div className="flex flex-col gap-4">
-            <p className="text-center text-gray-600">
-              Please sign in with your admin account to continue.
-            </p>
-            <Button
-              label="Sign in with GitHub"
-              icon="pi pi-github"
-              onClick={() => signIn('github')}
-              className="p-button-primary w-full"
-            />
-          </div>
-        ) : null} */}
-        
-        <div className="text-center">
-          <p className="text-gray-600">Authentication temporarily disabled</p>
-        </div>
-      </div>
-    </div>
-  );
-} 
+			router.push('/admin')
+			router.refresh()
+		} catch (error) {
+			console.error('Error logging in:', error)
+			toast.current?.show({
+				severity: 'error',
+				summary: 'Error',
+				detail: 'Failed to log in. Please check your credentials.',
+				life: 3000,
+			})
+		} finally {
+			setLoading(false)
+		}
+	}
+
+	return (
+		<div className='flex justify-center items-center min-h-screen p-4'>
+			<Toast ref={toast} />
+			<Card title='Admin Login' className='w-full max-w-md'>
+				<form onSubmit={handleLogin} className='space-y-4'>
+					<div className='flex flex-col gap-2'>
+						<label htmlFor='email'>Email</label>
+						<InputText
+							id='email'
+							type='email'
+							value={email}
+							onChange={e => setEmail(e.target.value)}
+							required
+						/>
+					</div>
+					<div className='flex flex-col gap-2'>
+						<label htmlFor='password'>Password</label>
+						<Password
+							id='password'
+							value={password}
+							onChange={e => setPassword(e.target.value)}
+							feedback={false}
+							required
+						/>
+					</div>
+					<Button
+						type='submit'
+						label='Log In'
+						loading={loading}
+						className='w-full'
+					/>
+				</form>
+			</Card>
+		</div>
+	)
+}

@@ -1,0 +1,30 @@
+# Build output
+.next
+out
+build
+dist
+
+# Dependencies
+node_modules
+
+# Cache
+.cache
+.eslintcache
+.npm
+.env*
+!.env.example
+
+# Logs
+*.log
+
+# Coverage directory
+coverage
+
+# Generated files
+*.generated.*
+.vercel
+.netlify
+
+# OS files
+.DS_Store
+Thumbs.db 

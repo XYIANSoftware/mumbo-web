@@ -1,12 +1,8 @@
-'use client';
+'use client'
 
-// import { AuthProvider } from '@/components/auth/AuthProvider';
+import { ReactNode } from 'react'
+import AuthProvider from '@/components/providers/AuthProvider'
 
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // return <AuthProvider>{children}</AuthProvider>;
-  return <>{children}</>;
-} 
+export default function AdminLayout({ children }: { children: ReactNode }) {
+	return <AuthProvider>{children}</AuthProvider>
+}

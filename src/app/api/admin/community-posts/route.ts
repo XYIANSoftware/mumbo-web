@@ -1,32 +1,120 @@
-import { NextResponse } from 'next/server';
-// import { getServerSession } from 'next-auth';
-import { getCommunityPosts } from '@/lib/data-service';
+import { NextResponse } from 'next/server'
+import { checkAdminAuth } from '@/lib/api-auth'
+import { supabase } from '@/lib/supabase'
 
 export async function GET() {
-  // const session = await getServerSession();
-  
-  // if (!session?.user?.isAdmin) {
-  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  // }
+	try {
+		const { data, error } = await supabase
+			.from('community_posts')
+			.select('*')
+			.order('created_at', { ascending: false })
 
-  try {
-    const data = await getCommunityPosts();
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('Error fetching community posts:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error fetching community posts:', error)
+		return NextResponse.json(
+			{ error: 'Failed to fetch community posts' },
+			{ status: 500 }
+		)
+	}
 }
 
 export async function POST(request: Request) {
-  // const session = await getServerSession();
-  
-  // if (!session?.user?.isAdmin) {
-  //   return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  // }
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
 
-  // For now, return a message that updates are not supported
-  return NextResponse.json({ 
-    error: 'Updates are not currently supported. Data is read-only from local files.' 
-  }, { status: 501 });
-} 
+	try {
+		const post = await request.json()
+
+		const { data, error } = await supabase
+			.from('community_posts')
+			.insert([post])
+			.select()
+			.single()
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error creating community post:', error)
+		return NextResponse.json(
+			{ error: 'Failed to create community post' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function PUT(request: Request) {
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
+
+	try {
+		const post = await request.json()
+
+		const { data, error } = await supabase
+			.from('community_posts')
+			.update(post)
+			.eq('id', post.id)
+			.select()
+			.single()
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error updating community post:', error)
+		return NextResponse.json(
+			{ error: 'Failed to update community post' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function DELETE(request: Request) {
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
+
+	try {
+		const { id } = await request.json()
+
+		const { error } = await supabase
+			.from('community_posts')
+			.delete()
+			.eq('id', id)
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ success: true })
+	} catch (error) {
+		console.error('Error deleting community post:', error)
+		return NextResponse.json(
+			{ error: 'Failed to delete community post' },
+			{ status: 500 }
+		)
+	}
+}

@@ -1,73 +1,111 @@
-'use client';
+'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Button } from 'primereact/button';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { Button } from 'primereact/button'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useRef, useState, useEffect } from 'react'
+import { Skeleton } from '@/components/ui/Skeleton'
+import { testSupabaseConnection } from '@/lib/supabase'
 
 export default function Home() {
-  const heroRef = useRef<HTMLDivElement>(null);
-  const parallaxRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress: heroScroll } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
+	const heroRef = useRef<HTMLDivElement>(null)
+	const parallaxRef = useRef<HTMLDivElement>(null)
+	const [heroImageLoaded, setHeroImageLoaded] = useState(false)
+	const [profileImageLoaded, setProfileImageLoaded] = useState(false)
+	const [parallaxImageLoaded, setParallaxImageLoaded] = useState(false)
+	const [aboutImageLoaded, setAboutImageLoaded] = useState(false)
 
-  const { scrollYProgress: sectionScroll } = useScroll({
-    target: parallaxRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const heroY = useTransform(heroScroll, [0, 1], ['0%', '50%']);
-  const sectionY = useTransform(sectionScroll, [0, 1], ['0%', '50%']);
+	useEffect(() => {
+		// Test Supabase connection on page load
+		testSupabaseConnection()
+	}, [])
 
-  return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section ref={heroRef} className="relative h-[100dvh] flex items-start justify-center overflow-hidden">
-        {/* Background Image */}
-        <motion.div style={{ y: heroY }} className="absolute inset-0 z-0 h-full">
-          <Image
-            src="/images/mumbo-assets/m_b06468.jpg"
-            alt="Mumbo performing"
-            fill
-            className="object-cover object-center hidden md:block"
-            priority
-            quality={100}
-          />
-          <Image
-            src="/images/mumbo-bg-m-2.png"
-            alt="Mumbo performing"
-            fill
-            className="object-cover object-center md:hidden"
-            priority
-            quality={100}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background-primary/80 via-background-primary/50 to-background-primary/80" />
-        </motion.div>
+	const { scrollYProgress: heroScroll } = useScroll({
+		target: heroRef,
+		offset: ['start start', 'end start'],
+	})
 
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 pt-[20dvh]">
-          <motion.div
-            className="mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative w-48 h-48 mx-auto rounded-full overflow-hidden">
-              <Image
-                src="/images/mumbo-assets/IMG_6879.jpeg"
-                alt="Mumbo"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </motion.div>
+	const { scrollYProgress: sectionScroll } = useScroll({
+		target: parallaxRef,
+		offset: ['start start', 'end start'],
+	})
 
-          {/* <motion.h1
+	const heroY = useTransform(heroScroll, [0, 1], ['0%', '50%'])
+	const sectionY = useTransform(sectionScroll, [0, 1], ['0%', '50%'])
+
+	return (
+		<div className='min-h-screen relative'>
+			{/* Hero Section */}
+			<section
+				ref={heroRef}
+				className='relative h-[100dvh] flex items-start justify-center overflow-hidden'
+				style={{ position: 'relative' }}
+			>
+				{/* Background Image */}
+				<motion.div
+					style={{ y: heroY }}
+					className='absolute inset-0 z-0 h-[150%] top-0'
+				>
+					{!heroImageLoaded && (
+						<div className='absolute inset-0 z-10'>
+							<Skeleton className='w-full h-full' />
+						</div>
+					)}
+					<Image
+						src='/images/mumbo-assets/m_b06468.jpg'
+						alt='Mumbo performing'
+						fill
+						className={`object-cover object-center hidden md:block transition-opacity duration-300 ${
+							heroImageLoaded ? 'opacity-100' : 'opacity-0'
+						}`}
+						priority
+						quality={100}
+						onLoad={() => setHeroImageLoaded(true)}
+					/>
+					<Image
+						src='/images/mumbo-assets/m_b06468.jpg'
+						alt='Mumbo performing'
+						fill
+						className={`object-cover object-center md:hidden transition-opacity duration-300 ${
+							heroImageLoaded ? 'opacity-100' : 'opacity-0'
+						}`}
+						priority
+						quality={100}
+						onLoad={() => setHeroImageLoaded(true)}
+					/>
+					<div className='absolute inset-0 bg-gradient-to-b from-background-primary/80 via-background-primary/50 to-background-primary/80' />
+				</motion.div>
+
+				{/* Content */}
+				<div className='relative z-10 text-center px-4 pt-[20dvh]'>
+					<motion.div
+						className='mb-8'
+						initial={{ opacity: 0, scale: 0.8 }}
+						animate={{ opacity: 1, scale: 1 }}
+						transition={{ duration: 0.8 }}
+					>
+						<div className='relative w-64 h-64 mx-auto'>
+							<div className='relative w-full h-full rounded-full overflow-hidden'>
+								{!profileImageLoaded && (
+									<Skeleton circle className='w-full h-full' />
+								)}
+								<Image
+									src='/images/mumbo-assets/IMG_6879.jpeg'
+									alt='Mumbo'
+									fill
+									className={`object-cover transition-opacity duration-300 ${
+										profileImageLoaded ? 'opacity-100' : 'opacity-0'
+									}`}
+									priority
+									quality={100}
+									onLoad={() => setProfileImageLoaded(true)}
+								/>
+							</div>
+						</div>
+					</motion.div>
+
+					{/* <motion.h1
             className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -78,7 +116,7 @@ export default function Home() {
             </span>
           </motion.h1> */}
 
-          {/* <motion.p
+					{/* <motion.p
             className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -87,168 +125,199 @@ export default function Home() {
             Where EDM meets playful vibes in a fusion of sound and energy
           </motion.p> */}
 
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
-            <Link href="/events">
-              <Button
-                label="Upcoming Events"
-                icon="pi pi-calendar"
-                className="p-button-lg w-full sm:w-auto p-3"
-                size="large"
-              />
-            </Link>
-            <Link href="/music">
-              <Button
-                label="Listen Now"
-                icon="pi pi-play"
-                className="p-button-lg p-button-secondary w-full sm:w-auto p-3"
-                size="large"
-              />
-            </Link>
-          </motion.div>
-        </div>
+					<motion.div
+						className='flex flex-col sm:flex-row gap-4 justify-center'
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8, delay: 0.4 }}
+					>
+						<Link href='/events'>
+							<Button
+								label='Upcoming Events'
+								icon='pi pi-calendar'
+								className='p-button-lg w-full sm:w-auto p-3'
+								raised
+								size='large'
+							/>
+						</Link>
+						<Link href='/music'>
+							<Button
+								label='Listen Now'
+								icon='pi pi-play'
+								className='p-button-lg w-full sm:w-auto p-3'
+								severity='info'
+								raised
+								size='large'
+							/>
+						</Link>
+					</motion.div>
+				</div>
 
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={{
-            duration: 1.5,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        >
-          <i className="pi pi-angle-down text-3xl text-white opacity-50"></i>
-        </motion.div>
-      </section>
+				{/* Scroll Indicator */}
+				<motion.div
+					className='absolute bottom-8 left-1/2 transform -translate-x-1/2'
+					animate={{
+						y: [0, 10, 0],
+					}}
+					transition={{
+						duration: 1.5,
+						repeat: Infinity,
+						ease: 'easeInOut',
+					}}
+				>
+					<i className='pi pi-angle-down text-3xl text-white opacity-50'></i>
+				</motion.div>
+			</section>
 
-      {/* Parallax Section */}
-      <section ref={parallaxRef} className="relative h-[50vh] overflow-hidden">
-        <motion.div style={{ y: sectionY }} className="absolute inset-0 h-full">
-          <Image
-            src="/images/mumbo-bg-1.png"
-            alt="Mumbo Background"
-            fill
-            className="object-cover object-center"
-            quality={100}
-          />
-          <div className="absolute inset-0 bg-purple-900/90" />
-        </motion.div>
-        <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center">
-          <div className="text-center">
-            <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-            >
-              Experience the Magic
-            </motion.h2>
-            <motion.p
-              className="text-xl text-gray-300 max-w-2xl mx-auto"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              Join us for an unforgettable journey through sound and rhythm
-            </motion.p>
-          </div>
-        </div>
-      </section>
+			{/* Parallax Section */}
+			<section ref={parallaxRef} className='relative h-[50vh] overflow-hidden'>
+				<motion.div style={{ y: sectionY }} className='absolute inset-0 h-full'>
+					{!parallaxImageLoaded && (
+						<div className='absolute inset-0 z-10'>
+							<Skeleton className='w-full h-full' />
+						</div>
+					)}
+					<Image
+						src='/images/mumbo-bg-1.png'
+						alt='Mumbo Background'
+						fill
+						className={`object-cover object-center transition-opacity duration-300 ${
+							parallaxImageLoaded ? 'opacity-100' : 'opacity-0'
+						}`}
+						quality={100}
+						onLoad={() => setParallaxImageLoaded(true)}
+					/>
+					<div className='absolute inset-0 bg-purple-900/90' />
+				</motion.div>
+				<div className='relative z-10 container mx-auto px-4 h-full flex items-center justify-center'>
+					<div className='text-center'>
+						<motion.h2
+							className='text-3xl md:text-5xl font-bold mb-6'
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							transition={{ duration: 0.8 }}
+						>
+							Experience the Magic
+						</motion.h2>
+						<motion.p
+							className='text-xl text-gray-300 max-w-2xl mx-auto'
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
+							transition={{ duration: 0.8, delay: 0.2 }}
+						>
+							Join us for an unforgettable journey through sound and rhythm
+						</motion.p>
+					</div>
+				</div>
+			</section>
 
-      {/* Featured Section */}
-      <section className="py-20 bg-background-secondary">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12 mb-16">
-            <motion.div
-              className="flex-1 relative aspect-square max-w-lg rounded-2xl overflow-hidden h-[400px]"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <Image
-                src="/images/mumbo-bg-1.png"
-                alt="Mumbo in action"
-                fill
-                className="object-cover object-center"
-                quality={90}
-              />
-            </motion.div>
-            <motion.div
-              className="flex-1"
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">About Mumbo</h2>
-              <p className="text-lg text-gray-300 mb-8">
-                Get ready for an unforgettable journey through sound and rhythm. Mumbo brings
-                a unique blend of electronic beats and nostalgic vibes that will keep you moving
-                all night long.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-primary-light">5+ Years</h3>
-                  <p className="text-gray-400">Of Experience</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-secondary-light">200+</h3>
-                  <p className="text-gray-400">Live Shows</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-accent-light">50+</h3>
-                  <p className="text-gray-400">Original Tracks</p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-semibold mb-2 text-primary-light">100K+</h3>
-                  <p className="text-gray-400">Happy Fans</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+			{/* Featured Section */}
+			<section className='py-20 bg-surface-section'>
+				<div className='container mx-auto px-4'>
+					<div className='flex flex-col lg:flex-row items-center gap-12 mb-16'>
+						<motion.div
+							className='flex-1 relative aspect-square max-w-lg rounded-2xl overflow-hidden'
+							initial={{ opacity: 0, x: -50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+							style={{ minHeight: '400px', position: 'relative' }}
+						>
+							{!aboutImageLoaded && (
+								<div className='absolute inset-0 z-10'>
+									<Skeleton className='w-full h-full' />
+								</div>
+							)}
+							<Image
+								src='/images/mumbo-assets/DV5A8712.jpeg'
+								alt='Mumbo in action'
+								fill
+								className={`object-cover object-center transition-opacity duration-300 ${
+									aboutImageLoaded ? 'opacity-100' : 'opacity-0'
+								}`}
+								quality={90}
+								onLoad={() => setAboutImageLoaded(true)}
+							/>
+						</motion.div>
+						<motion.div
+							className='flex-1'
+							initial={{ opacity: 0, x: 50 }}
+							whileInView={{ opacity: 1, x: 0 }}
+							transition={{ duration: 0.8 }}
+							viewport={{ once: true }}
+						>
+							<h2 className='text-3xl md:text-4xl font-bold mb-6'>
+								About Mumbo
+							</h2>
+							<p className='text-lg text-gray-300 mb-8'>
+								Get ready for an unforgettable journey through sound and rhythm.
+								Mumbo brings a unique blend of electronic beats and nostalgic
+								vibes that will keep you moving all night long.
+							</p>
+							<div className='grid grid-cols-2 gap-6'>
+								<div>
+									<h3 className='text-xl font-semibold mb-2 text-primary-light'>
+										5+ Years
+									</h3>
+									<p className='text-gray-400'>Of Experience</p>
+								</div>
+								<div>
+									<h3 className='text-xl font-semibold mb-2 text-secondary-light'>
+										200+
+									</h3>
+									<p className='text-gray-400'>Live Shows</p>
+								</div>
+								<div>
+									<h3 className='text-xl font-semibold mb-2 text-accent-light'>
+										50+
+									</h3>
+									<p className='text-gray-400'>Original Tracks</p>
+								</div>
+								<div>
+									<h3 className='text-xl font-semibold mb-2 text-primary-light'>
+										100K+
+									</h3>
+									<p className='text-gray-400'>Happy Fans</p>
+								</div>
+							</div>
+						</motion.div>
+					</div>
 
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            {/* Feature Cards */}
-            <div className="bg-background-paper p-6 rounded-xl">
-              <i className="pi pi-music text-4xl text-primary-light mb-4"></i>
-              <h3 className="text-xl font-semibold mb-2">Unique Sound</h3>
-              <p className="text-gray-400">
-                Blending EDM with nostalgic cartoon vibes for a one-of-a-kind experience
-              </p>
-            </div>
+					<motion.div
+						className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'
+						initial={{ opacity: 0, y: 50 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.8 }}
+						viewport={{ once: true }}
+					>
+						{/* Feature Cards */}
+						<div className='bg-surface-card shadow-lg p-6 rounded-xl'>
+							<i className='pi pi-music text-4xl text-primary mb-4'></i>
+							<h3 className='text-xl font-semibold mb-2 text-primary'>Unique Sound</h3>
+							<p className='text-color-secondary'>
+								Blending EDM with nostalgic cartoon vibes for a one-of-a-kind
+								experience
+							</p>
+						</div>
 
-            <div className="bg-background-paper p-6 rounded-xl">
-              <i className="pi pi-star text-4xl text-secondary-light mb-4"></i>
-              <h3 className="text-xl font-semibold mb-2">Live Performance</h3>
-              <p className="text-gray-400">
-                High-energy shows that keep the crowd moving all night long
-              </p>
-            </div>
+						<div className='bg-surface-card shadow-lg p-6 rounded-xl'>
+							<i className='pi pi-star text-4xl text-primary mb-4'></i>
+							<h3 className='text-xl font-semibold mb-2 text-primary'>Live Performance</h3>
+							<p className='text-color-secondary'>
+								High-energy shows that keep the crowd moving all night long
+							</p>
+						</div>
 
-            <div className="bg-background-paper p-6 rounded-xl">
-              <i className="pi pi-heart text-4xl text-accent-light mb-4"></i>
-              <h3 className="text-xl font-semibold mb-2">Community</h3>
-              <p className="text-gray-400">
-                Join a growing family of music lovers and party enthusiasts
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </div>
-  );
+						<div className='bg-surface-card shadow-lg p-6 rounded-xl'>
+							<i className='pi pi-heart text-4xl text-primary mb-4'></i>
+							<h3 className='text-xl font-semibold mb-2 text-primary'>Community</h3>
+							<p className='text-color-secondary'>
+								Join a growing family of music lovers and party enthusiasts
+							</p>
+						</div>
+					</motion.div>
+				</div>
+			</section>
+		</div>
+	)
 }
