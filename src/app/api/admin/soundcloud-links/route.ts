@@ -1,41 +1,124 @@
-import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-import { getSoundCloudLinks, updateSoundCloudLinks } from '@/lib/db-service';
+import { NextResponse } from 'next/server'
+import { checkAdminAuth } from '@/lib/api-auth'
+import { supabase } from '@/lib/supabase'
+import type { MusicLink } from '@/types/music'
 
 export async function GET() {
-  const session = await getServerSession();
-  
-  if (!session?.user?.isAdmin) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+	try {
+		const { data, error } = await supabase
+			.from('music_links')
+			.select('*')
+			.eq('platform', 'soundcloud')
+			.order('sort_order', { ascending: true })
 
-  try {
-    const data = await getSoundCloudLinks();
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('Error fetching SoundCloud links:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error fetching SoundCloud links:', error)
+		return NextResponse.json(
+			{ error: 'Failed to fetch SoundCloud links' },
+			{ status: 500 }
+		)
+	}
 }
 
 export async function POST(request: Request) {
-  const session = await getServerSession();
-  
-  if (!session?.user?.isAdmin) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-  }
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
 
-  try {
-    const links = await request.json();
-    
-    if (!Array.isArray(links)) {
-      return NextResponse.json({ error: 'Invalid data format' }, { status: 400 });
-    }
+	try {
+		const link: MusicLink = await request.json()
+		link.platform = 'soundcloud'
 
-    const updatedLinks = await updateSoundCloudLinks(links);
-    return NextResponse.json(updatedLinks);
-  } catch (error) {
-    console.error('Error saving SoundCloud links:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
-  }
-} 
+		const { data, error } = await supabase
+			.from('music_links')
+			.insert([link])
+			.select()
+			.single()
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error creating SoundCloud link:', error)
+		return NextResponse.json(
+			{ error: 'Failed to create SoundCloud link' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function PUT(request: Request) {
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
+
+	try {
+		const link: MusicLink = await request.json()
+		link.platform = 'soundcloud'
+
+		const { data, error } = await supabase
+			.from('music_links')
+			.update(link)
+			.eq('id', link.id)
+			.select()
+			.single()
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ data })
+	} catch (error) {
+		console.error('Error updating SoundCloud link:', error)
+		return NextResponse.json(
+			{ error: 'Failed to update SoundCloud link' },
+			{ status: 500 }
+		)
+	}
+}
+
+export async function DELETE(request: Request) {
+	const isAdmin = await checkAdminAuth()
+	if (!isAdmin) {
+		return NextResponse.json(
+			{ error: 'Unauthorized' },
+			{ status: 401 }
+		)
+	}
+
+	try {
+		const { id } = await request.json()
+
+		const { error } = await supabase
+			.from('music_links')
+			.delete()
+			.eq('id', id)
+
+		if (error) {
+			return NextResponse.json({ error: error.message }, { status: 500 })
+		}
+
+		return NextResponse.json({ success: true })
+	} catch (error) {
+		console.error('Error deleting SoundCloud link:', error)
+		return NextResponse.json(
+			{ error: 'Failed to delete SoundCloud link' },
+			{ status: 500 }
+		)
+	}
+}
