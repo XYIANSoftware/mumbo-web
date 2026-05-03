@@ -1,9 +1,14 @@
 import { NextResponse } from 'next/server'
+import { readTableJson } from '@/lib/data-service'
 import { checkAdminAuth } from '@/lib/api-auth'
-import { supabase } from '@/lib/supabase'
+import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 import type { Event } from '@/types/events'
 
 export async function GET() {
+	if (!isSupabaseConfigured()) {
+		const data = await readTableJson('events')
+		return NextResponse.json({ data })
+	}
 	try {
 		const { data, error } = await supabase
 			.from('events')

@@ -1,4 +1,6 @@
 import { NextResponse } from 'next/server'
+import { readData } from '@/lib/data-service'
+import { isSupabaseConfigured } from '@/lib/supabase'
 import { createClient } from '@/utils/supabase/server'
 
 function cleanImageUrl(url: string | null | undefined): string | undefined {
@@ -28,6 +30,48 @@ function cleanImageUrl(url: string | null | undefined): string | undefined {
 
 export async function GET() {
 	try {
+		if (!isSupabaseConfigured()) {
+			const rows = await readData<{
+				id?: string
+				title: string
+				description?: string
+				date: string
+				time?: string
+				location?: string
+				image_url?: string | null
+				image_path?: string | null
+				ticket_url?: string | null
+				price?: string | null
+				status?: string | null
+				sort_order?: number | null
+				created_at?: string | null
+				updated_at?: string | null
+			}>('events.json')
+			const data = (rows || []).filter(
+				e => (e.status ?? 'UPCOMING') === 'UPCOMING'
+			)
+			const formattedData = data.map(event => {
+				const cleanedImageUrl = cleanImageUrl(event.image_url)
+				return {
+					id: event.id,
+					title: event.title,
+					description: event.description,
+					date: event.date,
+					time: event.time ?? '',
+					location: event.location ?? '',
+					image_url: cleanedImageUrl,
+					image_path: cleanedImageUrl,
+					ticket_url: event.ticket_url ?? undefined,
+					price: event.price ?? undefined,
+					status: event.status,
+					sort_order: event.sort_order ?? undefined,
+					created_at: event.created_at ?? undefined,
+					updated_at: event.updated_at ?? undefined,
+				}
+			})
+			return NextResponse.json(formattedData)
+		}
+
 		console.log('Creating Supabase client...')
 		const supabase = await createClient()
 		

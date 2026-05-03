@@ -1,18 +1,8 @@
 import { NextResponse } from 'next/server'
 import { getSpotifyLinks } from '@/lib/db-service'
-import { supabase } from '@/lib/supabase'
 
 export async function GET() {
 	try {
-		// Test Supabase connection first
-		const { error: testError } = await supabase
-			.from('spotify_links')
-			.select('count')
-		if (testError) {
-			console.error('Supabase connection test failed:', testError)
-			throw new Error(`Supabase connection failed: ${testError.message}`)
-		}
-
 		console.log('Attempting to fetch Spotify links...')
 		const data = await getSpotifyLinks()
 		console.log('Successfully fetched data:', data)

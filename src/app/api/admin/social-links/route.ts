@@ -1,9 +1,16 @@
 import { NextResponse } from 'next/server'
+import { readTableJson } from '@/lib/data-service'
 import { checkAdminAuth } from '@/lib/api-auth'
-import { supabase } from '@/lib/supabase'
+import { isSupabaseConfigured, supabase } from '@/lib/supabase'
 import type { SocialLink } from '@/types/social'
 
 export async function GET() {
+	if (!isSupabaseConfigured()) {
+		const data = (await readTableJson<SocialLink>('social_links'))
+			.slice()
+			.sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+		return NextResponse.json({ data })
+	}
 	try {
 		const { data, error } = await supabase
 			.from('social_links')
