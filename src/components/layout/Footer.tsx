@@ -1,118 +1,26 @@
 'use client'
 
-import Link from 'next/link'
-
-const socialLinks = [
-	{
-		label: 'Instagram',
-		url: 'https://instagram.com/djmumbo',
-		icon: 'pi pi-instagram',
-	},
-	{
-		label: 'Twitter',
-		url: 'https://twitter.com/djmumbo',
-		icon: 'pi pi-twitter',
-	},
-	{
-		label: 'YouTube',
-		url: 'https://youtube.com/djmumbo',
-		icon: 'pi pi-youtube',
-	},
-	{
-		label: 'SoundCloud',
-		url: 'https://soundcloud.com/djmumbo',
-		icon: 'pi pi-cloud',
-	},
-] as const
+import { FOOTER_SOCIAL_LINKS } from '@/constants/footer-social'
+import { FOOTER_NAV_ITEMS } from '@/constants/site-nav'
+import { FooterBrand } from './footer/footer-brand'
+import { FooterNavLinks } from './footer/footer-nav-links'
+import { FooterSocialLinks } from './footer/footer-social-links'
 
 export default function Footer() {
 	const currentYear = new Date().getFullYear()
 
 	return (
 		<footer className='bg-background-secondary py-12'>
-			<div className='container mx-auto px-4'>
-				<div className='grid grid-cols-1 md:grid-cols-3 gap-8'>
-					{/* Brand */}
-					<div className='flex flex-col items-center md:items-start'>
-						<Link href='/' className='mb-4'>
-							<img
-								src='/images/mumbo-assets/Mumbo_logo.png'
-								alt='Mumbo'
-								className='h-8 w-auto'
-							/>
-						</Link>
-						<p className='text-gray-400 text-center md:text-left'>
-							Experience the fusion of EDM and playful vibes
-						</p>
+			<div className='px-4 max-w-6xl mx-auto w-full'>
+				<div className='flex flex-col md:flex-row md:flex-wrap md:justify-between md:items-start gap-10'>
+					<FooterBrand />
+					<div className='flex flex-1 justify-center md:min-w-0 w-full md:w-auto'>
+						<FooterNavLinks items={FOOTER_NAV_ITEMS} />
 					</div>
-
-					{/* Quick Links */}
-					<div className='flex flex-col items-center md:items-start'>
-						<h3 className='text-xl font-semibold text-white mb-4'>
-							Quick Links
-						</h3>
-						<nav className='flex flex-col gap-2'>
-							<Link
-								href='/events'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								Events
-							</Link>
-							<Link
-								href='/music'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								Music
-							</Link>
-							<Link
-								href='/highlights'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								Highlights
-							</Link>
-							<Link
-								href='/socials'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								Socials
-							</Link>
-							<Link
-								href='/about'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								About
-							</Link>
-							<Link
-								href='/contact'
-								className='text-gray-400 hover:text-primary-light transition-colors'
-							>
-								Contact
-							</Link>
-						</nav>
-					</div>
-
-					{/* Social Links */}
-					<div className='flex flex-col items-center md:items-start'>
-						<h3 className='text-xl font-semibold text-white mb-4'>Connect</h3>
-						<div className='flex gap-4'>
-							{socialLinks.map(link => (
-								<a
-									key={link.label}
-									href={link.url}
-									target='_blank'
-									rel='noopener noreferrer'
-									className='text-gray-400 hover:text-primary-light transition-colors'
-									aria-label={link.label}
-								>
-									<i className={`${link.icon} text-2xl`}></i>
-								</a>
-							))}
-						</div>
-					</div>
+					<FooterSocialLinks links={FOOTER_SOCIAL_LINKS} />
 				</div>
 
-				{/* Copyright */}
-				<div className='mt-8 pt-8 border-t border-background-paper text-center text-gray-400'>
+				<div className='mt-8 pt-8 border-t border-background-paper text-center text-color-secondary'>
 					<p>© {currentYear} DJ Mumbo. All rights reserved.</p>
 				</div>
 			</div>

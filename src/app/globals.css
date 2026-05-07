@@ -102,21 +102,9 @@ h6 {
 	font-family: var(--font-family) !important;
 }
 
-/* Add padding for rounded buttons */
-.p-button {
-	background-color: var(--primary-color);
-	border-color: var(--primary-color);
-}
-
-.p-button.p-button-rounded {
-	padding-left: 2rem !important;
-	padding-right: 2rem !important;
-}
-
-.p-button.p-button-rounded.p-button-lg {
-	padding-left: 2.5rem !important;
-	padding-right: 2.5rem !important;
-}
+/* Button colors and padding come from the Lara theme (see layout.tsx).
+   Do not add site-wide .p-button overrides here — they break variants
+   (outlined/text) and icon-only rounded controls. */
 
 .p-menubar {
 	background: transparent;

@@ -1,3 +1,7 @@
+import {
+	MUMBO_SPOTIFY_ARTIST_URL,
+	MUMBO_SOUNDCLOUD_PROFILE_URL,
+} from '@/constants/streaming'
 import { Link } from '@/types/content'
 import type { GroupedLinks } from './grouped-links'
 
@@ -10,7 +14,7 @@ export const LINKS_MAIN_PINNED: Link[] = [
 		id: 'pinned-spotify',
 		title: 'Spotify',
 		description: 'Stream on Spotify',
-		url: 'https://open.spotify.com/artist/0v4RYCckfkFu4dXWl35BXl?si=ygimJ6ejQfC4RkT7r5ZWHA',
+		url: MUMBO_SPOTIFY_ARTIST_URL,
 		category: 'main',
 		type: 'social',
 		platform: 'SPOTIFY',
@@ -22,7 +26,7 @@ export const LINKS_MAIN_PINNED: Link[] = [
 		id: 'pinned-soundcloud',
 		title: 'SoundCloud',
 		description: 'All tracks & mixes',
-		url: 'https://soundcloud.com/mumbobeatz',
+		url: MUMBO_SOUNDCLOUD_PROFILE_URL,
 		category: 'main',
 		type: 'social',
 		platform: 'SOUNDCLOUD',

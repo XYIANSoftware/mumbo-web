@@ -1,6 +1,8 @@
 'use client'
 
+import { Panel } from 'primereact/panel'
 import type { MusicEntry } from './music-types'
+import { MUSIC_PAGE_CONTENT_MAX_CLASS } from './music-streaming-section'
 import { MusicReleaseGrid } from './MusicReleaseGrid'
 
 export interface MusicCatalogSectionProps {
@@ -15,10 +17,21 @@ export function MusicCatalogSection({
 	items,
 }: MusicCatalogSectionProps) {
 	return (
-		<section>
-			<h2 className='text-2xl font-semibold text-white mb-6'>{title}</h2>
-			<p className='text-gray-400 mb-6 max-w-2xl'>{description}</p>
-			<MusicReleaseGrid items={items} />
-		</section>
+		<div className={MUSIC_PAGE_CONTENT_MAX_CLASS}>
+			<Panel
+				header={title}
+				pt={{
+					title: {
+						className: 'text-2xl font-semibold text-center',
+					},
+					content: { className: 'pt-2' },
+				}}
+			>
+				<p className='text-color-secondary mb-6 line-height-3 text-center'>
+					{description}
+				</p>
+				<MusicReleaseGrid items={items} />
+			</Panel>
+		</div>
 	)
 }

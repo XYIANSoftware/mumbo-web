@@ -1,0 +1,30 @@
+'use client'
+
+import Link from 'next/link'
+
+const DEFAULT_TAGLINE = 'Experience the fusion of EDM and playful vibes'
+
+export interface FooterBrandProps {
+	tagline?: string
+	className?: string
+}
+
+export function FooterBrand({
+	tagline = DEFAULT_TAGLINE,
+	className = '',
+}: FooterBrandProps) {
+	return (
+		<div
+			className={`flex flex-col items-center md:items-start text-center md:text-left shrink-0 ${className}`.trim()}
+		>
+			<Link href='/' className='mb-4'>
+				<img
+					src='/images/mumbo-assets/Mumbo_logo.png'
+					alt='Mumbo'
+					className='h-8 w-auto'
+				/>
+			</Link>
+			<p className='text-color-secondary max-w-xs'>{tagline}</p>
+		</div>
+	)
+}

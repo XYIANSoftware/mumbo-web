@@ -6,16 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Toolbar } from 'primereact/toolbar'
 import { Sidebar } from 'primereact/sidebar'
 import { Button } from 'primereact/button'
-
-const navItems = [
-	{ label: 'Home', path: '/' },
-	{ label: 'Events', path: '/events' },
-	{ label: 'Music', path: '/music' },
-	{ label: 'Highlights', path: '/highlights' },
-	{ label: 'Socials', path: '/socials' },
-	{ label: 'About', path: '/about' },
-	{ label: 'Contact', path: '/contact' },
-] as const
+import { SITE_NAV_ITEMS } from '@/constants/site-nav'
 
 export default function Header() {
 	const [sidebarVisible, setSidebarVisible] = useState(false)
@@ -33,7 +24,7 @@ export default function Header() {
 
 	const center = (
 		<nav className='hidden md:flex gap-6'>
-			{navItems.map(item => (
+			{SITE_NAV_ITEMS.map(item => (
 				<Link
 					key={item.path}
 					href={item.path}
@@ -89,7 +80,7 @@ export default function Header() {
 					</div>
 					<div className='flex-1 overflow-y-auto'>
 						<div className='flex flex-col p-4 gap-2'>
-							{navItems.map(item => (
+							{SITE_NAV_ITEMS.map(item => (
 								<Link
 									key={item.path}
 									href={item.path}

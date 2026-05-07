@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-05-06 — SoundCloud profile embed
+
+- **`src/constants/streaming.ts`**: **`MUMBO_SOUNDCLOUD_PROFILE_URL`** + **`MUMBO_SOUNDCLOUD_EMBED_SRC`**
+  (official [HTML5 widget](https://developers.soundcloud.com/docs/api/html5-widget), visual profile player).
+- **`SoundCloudProfileEmbed`** on **`/music`** below Spotify; pinned SoundCloud tile uses the same profile URL.
+
+## 2026-05-06 — Spotify artist URL + embed
+
+- **`src/constants/streaming.ts`**: **`MUMBO_SPOTIFY_ARTIST_URL`** and **`MUMBO_SPOTIFY_EMBED_SRC`**
+  ([artist profile](https://open.spotify.com/artist/0v4RYCckfkFu4dXWl35BXl)).
+- **Pinned Spotify tile** uses the canonical artist URL (no tracking query params).
+- **`SpotifyArtistEmbed`** on **`/music`** (iframe player from Spotify’s embed URL).
+
 ## 2026-05-03 — Socials route + pinned Spotify / SoundCloud
 
 - **Route**: **`/socials`** replaces **`/links`** for the Socials page; **`/links`** → **`/socials`**

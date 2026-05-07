@@ -28,7 +28,7 @@ export function MusicPlatformBubbles({ entry }: { entry: MusicEntry }) {
 
 	return (
 		<div
-			className='flex flex-wrap gap-2 mt-3'
+			className='flex flex-wrap gap-2 mt-3 items-start content-start'
 			onClick={stopBubble}
 			onKeyDown={e => e.stopPropagation()}
 			role='group'
@@ -41,11 +41,14 @@ export function MusicPlatformBubbles({ entry }: { entry: MusicEntry }) {
 						key={key}
 						rounded
 						outlined
+						size='small'
 						aria-label={label}
 						onClick={() => window.open(url, '_blank')}
 						pt={{
 							root: {
-								className: 'w-10 h-10 p-0',
+								className:
+									'inline-flex h-10 w-10 min-h-10 min-w-10 shrink-0 ' +
+									'p-0 justify-center items-center',
 							},
 						}}
 					>

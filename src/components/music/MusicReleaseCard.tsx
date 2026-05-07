@@ -1,36 +1,77 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { Card } from '@/components/ui/Card'
+import type { KeyboardEvent } from 'react'
+import { Card } from 'primereact/card'
+import { Image } from 'primereact/image'
 import type { MusicEntry } from './music-types'
 import { MusicPlatformBubbles } from './MusicPlatformBubbles'
 
+/** Cover art in the catalog grid (theme scales with root font size). */
+const ART_REM = '7rem'
+
 export interface MusicReleaseCardProps {
 	entry: MusicEntry
-	index: number
 }
 
-export function MusicReleaseCard({ entry, index }: MusicReleaseCardProps) {
+export function MusicReleaseCard({ entry }: MusicReleaseCardProps) {
+	function handleOpenPrimary() {
+		window.open(entry.primaryUrl, '_blank')
+	}
+
+	function handleCardKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+		if (e.key === 'Enter' || e.key === ' ') {
+			e.preventDefault()
+			handleOpenPrimary()
+		}
+	}
+
+	const header = (
+		<div className='flex justify-center p-2'>
+			<Image
+				src={entry.image}
+				alt=''
+				width={ART_REM}
+				height={ART_REM}
+				preview={false}
+				pt={{
+					root: { className: 'inline-flex' },
+					image: {
+						className:
+							'border-round object-cover w-28 h-28 max-w-[7rem] max-h-[7rem]',
+					},
+				}}
+			/>
+		</div>
+	)
+
 	return (
-		<motion.div
-			initial={{ opacity: 0, y: 20 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.5, delay: index * 0.08 }}
+		<Card
+			header={header}
+			title={entry.title}
+			role='link'
+			tabIndex={0}
+			aria-label={`Open ${entry.title} on its primary streaming platform`}
+			onClick={handleOpenPrimary}
+			onKeyDown={handleCardKeyDown}
+			pt={{
+				root: {
+					className:
+						'h-full cursor-pointer border-round-xl overflow-hidden ' +
+						'transition-shadow transition-duration-150 hover:shadow-md',
+				},
+				header: {
+					className: 'bg-transparent border-none p-0 m-0',
+				},
+				body: { className: 'p-0' },
+				title: {
+					className: 'text-lg font-semibold line-clamp-2 px-3 pt-1 m-0',
+				},
+				content: {
+					className: 'px-3 pb-3 pt-2',
+				},
+			}}
 		>
-			<Card
-				className='h-full cursor-pointer'
-				onClick={() => window.open(entry.primaryUrl, '_blank')}
-			>
-				<div className='relative aspect-square mb-4 overflow-hidden rounded-lg'>
-					<img
-						src={entry.image}
-						alt=''
-						className='object-cover w-full h-full transition-transform duration-300 hover:scale-110'
-					/>
-				</div>
-				<h3 className='text-xl font-semibold mb-1'>{entry.title}</h3>
-				<MusicPlatformBubbles entry={entry} />
-			</Card>
-		</motion.div>
+			<MusicPlatformBubbles entry={entry} />
+		</Card>
 	)
 }

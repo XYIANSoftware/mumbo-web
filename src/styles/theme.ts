@@ -1,3 +1,8 @@
+/**
+ * App-level palette for non-Prime surfaces / Tailwind mappings.
+ * PrimeReact components use CSS variables from Lara (`layout.tsx` imports
+ * `primereact/resources/themes/lara-dark-blue/theme.css`) — not this object.
+ */
 export const theme = {
 	colors: {
 		primary: {
