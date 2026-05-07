@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 @config '../../tailwind.config.ts';
+@import '../styles/liquid-glass.css';
+
+/* Framer Motion useScroll(default container): measures document.scrollingElement
+   (<html>), which is position:static by default — triggers dev warning when a
+   separate target ref is used. Non-static root fixes scroll offset math. */
+html {
+	position: relative;
+}
 
 :root {
 	/* Use PrimeReact theme variables */
@@ -9,6 +17,23 @@
 	--text-primary: var(--text-color);
 	--text-secondary: var(--text-color-secondary);
 	--text-disabled: var(--text-color-disabled);
+
+	/* Tailwind `primary.*` / `secondary.*` / `accent.*` — Lara ships
+	   `--primary-color` + palette; derive lights/darks for consistent use. */
+	--primary-main: var(--primary-color);
+	--primary-light: color-mix(in srgb, var(--primary-color) 70%, white);
+	--primary-dark: color-mix(in srgb, var(--primary-color) 55%, black);
+	--secondary-main: var(--pink-500);
+	--secondary-light: var(--pink-300);
+	--secondary-dark: var(--pink-700);
+	--accent-main: #8b5cf6;
+	--accent-light: #a78bfa;
+	--accent-dark: #7c3aed;
+
+	/* Socials main tiles (`LinksMainTile`) — secondary pink, theme-adjacent */
+	--social-link-border: rgb(236 72 153 / 0.38);
+	--social-link-border-strong: rgb(236 72 153 / 0.55);
+	--social-link-glow: rgb(236 72 153 / 0.14);
 }
 
 /* Base Styles */
@@ -102,21 +127,9 @@ h6 {
 	font-family: var(--font-family) !important;
 }
 
-/* Add padding for rounded buttons */
-.p-button {
-	background-color: var(--primary-color);
-	border-color: var(--primary-color);
-}
-
-.p-button.p-button-rounded {
-	padding-left: 2rem !important;
-	padding-right: 2rem !important;
-}
-
-.p-button.p-button-rounded.p-button-lg {
-	padding-left: 2.5rem !important;
-	padding-right: 2.5rem !important;
-}
+/* Button colors and padding come from the Lara theme (see layout.tsx).
+   Do not add site-wide .p-button overrides here — they break variants
+   (outlined/text) and icon-only rounded controls. */
 
 .p-menubar {
 	background: transparent;
@@ -128,9 +141,8 @@ h6 {
 	padding: 0.75rem 1.25rem;
 }
 
-.p-sidebar {
-	background: var(--surface-overlay);
-}
+/* Sidebar: do not style `.p-sidebar` globally — use pt + liquid-glass-sidebar-root
+   in Header so the panel stays transparent and rounded (see liquid-glass.css). */
 
 /* Custom Animations */
 @keyframes pulse {

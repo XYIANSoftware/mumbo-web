@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react'
+
 export interface HighlightItem {
 	id: string
 	title: string
@@ -6,6 +8,11 @@ export interface HighlightItem {
 	src: string
 	thumbnail: string
 	description?: string
+	/**
+	 * Optional rich block below the caption in the details dialog.
+	 * Omit when there is nothing beyond media + short description.
+	 */
+	details?: ReactNode | null
 	/** Optional reel opens in a new tab from the card actions. */
 	instagramHighlightUrl?: string
 	/** When set, dialog plays this YouTube embed instead of a video file. */

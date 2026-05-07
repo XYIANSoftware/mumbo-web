@@ -41,7 +41,7 @@ export const PageHeader = ({
 					</span>
 				</h1>
 				{subtitle && (
-					<p className='text-xl md:text-2xl text-text-secondary max-w-2xl mx-auto'>
+					<p className='text-xl md:text-2xl text-color-secondary max-w-2xl mx-auto'>
 						{subtitle}
 					</p>
 				)}

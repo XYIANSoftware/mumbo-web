@@ -55,7 +55,7 @@ export function HomeManInTheHat({
 				<p className='text-lg md:text-xl text-primary-light font-medium mb-6'>
 					Behind the Decks 03 w/ Zombae Ft. Mumbo
 				</p>
-				<p className='text-lg text-gray-300'>
+				<p className='text-lg text-color-secondary'>
 					Ryan, aka MUMBO, is all about versatility in his sets. Blending
 					hard-hitting bass with funky, high-energy house music, he keeps the
 					crowd on their toes. Every time he takes the stage, you can&apos;t

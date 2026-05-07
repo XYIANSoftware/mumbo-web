@@ -26,7 +26,7 @@ export function LinksProfileHero() {
 					@mumbobeatz
 				</span>
 			</h1>
-			<p className='text-gray-300 text-xs'>Do the things you love</p>
+			<p className='text-color-secondary text-xs'>Do the things you love</p>
 		</motion.div>
 	)
 }

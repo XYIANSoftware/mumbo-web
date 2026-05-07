@@ -1,9 +1,8 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Link } from '@/types/content'
-import { Card } from 'primereact/card'
-import { LinksPlatformIcon } from './links-platform-icon'
+import type { Link } from '@/types/content'
+import { LinksMainTile } from './links-main-tile'
 
 export function LinksMainGrid({ links }: { links: Link[] }) {
 	return (
@@ -13,33 +12,18 @@ export function LinksMainGrid({ links }: { links: Link[] }) {
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5, delay: 0.2 }}
 		>
-			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2'>
+			{/*
+				Flex + wrap + justify-center so incomplete last rows stay centered
+				(unlike CSS grid, where orphans stick to column 1).
+			*/}
+			<div className='flex flex-wrap justify-center gap-4 w-full'>
 				{links.map((link: Link) => (
-					<Card
+					<div
 						key={link.id}
-						pt={{
-							root: {
-								className:
-									'bg-background-paper border-none hover:bg-background-secondary transition-colors cursor-pointer',
-							},
-							content: { className: 'p-0' },
-						}}
-						onClick={() => window.open(link.url, '_blank')}
+						className='w-[min(100%,17.5rem)] shrink-0 basis-[min(100%,17.5rem)]'
 					>
-						<div className='flex items-center gap-4 p-4'>
-							{LinksPlatformIcon(link.platform, 'text-5xl')}
-							<div className='min-w-0 text-left'>
-								<h2 className='text-base font-medium mb-1 text-white truncate'>
-									{link.title}
-								</h2>
-								{link.description && (
-									<p className='text-sm text-gray-200 truncate'>
-										{link.description}
-									</p>
-								)}
-							</div>
-						</div>
-					</Card>
+						<LinksMainTile link={link} />
+					</div>
 				))}
 			</div>
 		</motion.div>

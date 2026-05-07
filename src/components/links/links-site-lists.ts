@@ -1,11 +1,39 @@
+import {
+	MUMBO_SPOTIFY_ARTIST_URL,
+	MUMBO_SOUNDCLOUD_PROFILE_URL,
+} from '@/constants/streaming'
 import { Link } from '@/types/content'
 import type { GroupedLinks } from './grouped-links'
 
 /**
- * Pinned “main” tiles on `/links` (Socials). Shown first, then merged with
- * `links.main` from the API. Edit this array to add/remove pinned platforms.
+ * Pinned “main” tiles on `/socials`. Shown first, then merged with `links.main`
+ * from the API. Edit this array to add/remove pinned platforms.
  */
 export const LINKS_MAIN_PINNED: Link[] = [
+	{
+		id: 'pinned-spotify',
+		title: 'Spotify',
+		description: 'Stream on Spotify',
+		url: MUMBO_SPOTIFY_ARTIST_URL,
+		category: 'main',
+		type: 'social',
+		platform: 'SPOTIFY',
+		sort_order: -4,
+		created_at: '',
+		updated_at: '',
+	},
+	{
+		id: 'pinned-soundcloud',
+		title: 'SoundCloud',
+		description: 'All tracks & mixes',
+		url: MUMBO_SOUNDCLOUD_PROFILE_URL,
+		category: 'main',
+		type: 'social',
+		platform: 'SOUNDCLOUD',
+		sort_order: -3,
+		created_at: '',
+		updated_at: '',
+	},
 	{
 		id: 'pinned-apple-music',
 		title: 'Apple Music',

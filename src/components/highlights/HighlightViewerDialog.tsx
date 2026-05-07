@@ -11,6 +11,8 @@ export interface HighlightViewerDialogProps {
 }
 
 export function HighlightViewerDialog({ item, onHide }: HighlightViewerDialogProps) {
+	const hasExtraDetails = item != null && item.details != null
+
 	return (
 		<Dialog
 			visible={!!item}
@@ -48,7 +50,15 @@ export function HighlightViewerDialog({ item, onHide }: HighlightViewerDialogPro
 				<video src={item?.src} controls className='w-full h-auto rounded-lg' />
 			)}
 			{item?.description && (
-				<p className='mt-4 text-gray-400'>{item.description}</p>
+				<p className='mt-4 text-color-secondary'>{item.description}</p>
+			)}
+			{hasExtraDetails && (
+				<div className='mt-6 border-t border-background-secondary pt-4'>
+					<h4 className='text-sm font-semibold text-color mb-3'>Details</h4>
+					<div className='text-color-secondary text-sm space-y-2'>
+						{item.details}
+					</div>
+				</div>
 			)}
 			{item?.instagramHighlightUrl && (
 				<div className='mt-4'>

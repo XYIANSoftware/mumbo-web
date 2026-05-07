@@ -3,22 +3,24 @@
 import { motion } from 'framer-motion'
 import { Card } from 'primereact/card'
 import { Button } from 'primereact/button'
+import { HIGHLIGHT_CARD_SHELL_CLASS } from '@/constants/highlights-layout'
 import type { HighlightItem } from './highlight-model'
 import { HighlightCardMedia } from './HighlightCardMedia'
 
 export interface HighlightGridCardProps {
 	item: HighlightItem
 	index: number
-	onOpenGallery: (item: HighlightItem) => void
+	onOpenDetails: (item: HighlightItem) => void
 }
 
 export function HighlightGridCard({
 	item,
 	index,
-	onOpenGallery,
+	onOpenDetails,
 }: HighlightGridCardProps) {
 	return (
 		<motion.div
+			className={HIGHLIGHT_CARD_SHELL_CLASS}
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -27,7 +29,7 @@ export function HighlightGridCard({
 				pt={{
 					root: {
 						className:
-							'bg-background-paper border-none hover:bg-background-secondary transition-colors',
+							'bg-background-paper border-none hover:bg-background-secondary transition-colors rounded-lg overflow-hidden',
 					},
 					content: { className: 'p-0' },
 				}}
@@ -36,14 +38,16 @@ export function HighlightGridCard({
 				<div className='p-4'>
 					<h3 className='text-lg font-semibold mb-2'>{item.title}</h3>
 					{item.description && (
-						<p className='text-gray-400 text-sm mb-3'>{item.description}</p>
+						<p className='text-color-secondary text-sm mb-3'>
+							{item.description}
+						</p>
 					)}
 					<div className='flex flex-wrap gap-2'>
 						<Button
-							label='Gallery'
-							icon='pi pi-images'
+							label='Details'
+							icon='pi pi-info-circle'
 							size='small'
-							onClick={() => onOpenGallery(item)}
+							onClick={() => onOpenDetails(item)}
 							pt={{
 								root: { className: 'rounded-full' },
 							}}

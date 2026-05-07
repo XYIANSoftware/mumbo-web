@@ -25,52 +25,62 @@ export function LinksCategorizedAccordion({ links }: { links: GroupedLinks }) {
 			<Accordion>
 				{Object.entries(links)
 					.filter(([category]) => category !== 'main')
-					.map(([category, categoryLinks]) => (
-						<AccordionTab
-							key={category}
-							header={
-								<div className='flex items-center gap-3'>
-									{LinksPlatformIcon(category, 'text-2xl')}
-									<span className='text-white'>
-										{formatCategory(category)}
-									</span>
-									<span className='text-sm text-gray-200'>
-										({categoryLinks.length})
-									</span>
-								</div>
-							}
-						>
-							<div className='space-y-2 pt-2'>
-								{categoryLinks.map((link: Link) => (
-									<Button
-										key={link.id}
-										onClick={() => window.open(link.url, '_blank')}
-										className='p-0 w-full'
-										pt={{
-											root: {
-												className:
-													'bg-background-paper hover:bg-background-secondary border-none',
-											},
-										}}
-									>
-										<div className='flex items-center gap-3 p-3'>
-											{LinksPlatformIcon(link.platform, 'text-2xl')}
-											<div className='text-left'>
-												<h3 className='text-base font-medium mb-0.5 text-white'>
-													{link.title}
-												</h3>
-												{link.description && (
-													<p className='text-sm text-gray-200'>
-														{link.description}
-													</p>
+					.map(([category, rawLinks]) => {
+						const categoryLinks = Array.isArray(rawLinks)
+							? rawLinks
+							: []
+						return (
+							<AccordionTab
+								key={category}
+								header={
+									<div className='flex items-center gap-3'>
+										{LinksPlatformIcon(category, 'text-2xl')}
+										<span className='text-color'>
+											{formatCategory(category)}
+										</span>
+										<span className='text-sm text-color-secondary'>
+											({categoryLinks.length})
+										</span>
+									</div>
+								}
+							>
+								<div className='space-y-2 pt-2'>
+									{categoryLinks.map((link: Link) => (
+										<Button
+											key={link.id}
+											onClick={() =>
+												window.open(link.url, '_blank')
+											}
+											className='p-0 w-full'
+											pt={{
+												root: {
+													className:
+														'bg-background-paper hover:bg-background-secondary border-none',
+												},
+											}}
+										>
+											<div className='flex items-center gap-3 p-3'>
+												{LinksPlatformIcon(
+													link.platform,
+													'text-2xl'
 												)}
+												<div className='text-left'>
+													<h3 className='text-base font-medium mb-0.5 text-color'>
+														{link.title}
+													</h3>
+													{link.description && (
+														<p className='text-sm text-color-secondary'>
+															{link.description}
+														</p>
+													)}
+												</div>
 											</div>
-										</div>
-									</Button>
-								))}
-							</div>
-						</AccordionTab>
-					))}
+										</Button>
+									))}
+								</div>
+							</AccordionTab>
+						)
+					})}
 			</Accordion>
 		</motion.div>
 	)

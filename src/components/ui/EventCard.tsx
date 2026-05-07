@@ -82,7 +82,7 @@ export function EventCard({ event, index = 0, variant = 'upcoming' }: EventCardP
 					)}
 					{imageError && (
 						<div
-							className={`bg-background-secondary rounded-lg flex items-center justify-center text-gray-400 p-2 text-center text-sm ${
+							className={`bg-background-secondary rounded-lg flex items-center justify-center text-color-secondary p-2 text-center text-sm ${
 								variant === 'past'
 									? 'aspect-square max-h-28'
 									: 'aspect-video md:aspect-square'
@@ -94,7 +94,7 @@ export function EventCard({ event, index = 0, variant = 'upcoming' }: EventCardP
 				</>
 			) : (
 				<div
-					className={`bg-background-secondary rounded-lg flex items-center justify-center text-gray-400 p-2 text-center text-sm ${
+					className={`bg-background-secondary rounded-lg flex items-center justify-center text-color-secondary p-2 text-center text-sm ${
 						variant === 'past'
 							? 'aspect-square max-h-28'
 							: 'aspect-video md:aspect-square'
@@ -122,7 +122,7 @@ export function EventCard({ event, index = 0, variant = 'upcoming' }: EventCardP
 				{event.title}
 			</h3>
 			<div
-				className={`flex flex-wrap gap-2 text-gray-300 ${
+				className={`flex flex-wrap gap-2 text-color-secondary ${
 					variant === 'past' ? 'text-sm' : 'gap-4'
 				}`}
 			>
@@ -151,7 +151,7 @@ export function EventCard({ event, index = 0, variant = 'upcoming' }: EventCardP
 				)}
 			</div>
 			{variant === 'upcoming' && (
-				<p className='text-gray-400'>{event.description}</p>
+				<p className='text-color-secondary'>{event.description}</p>
 			)}
 			{variant === 'upcoming' && event.ticket_url && (
 				<Button

@@ -13,9 +13,9 @@ export function EventsSections({ upcoming, past }: EventsSectionsProps) {
 	return (
 		<div className='space-y-12'>
 			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold text-white'>Upcoming events</h2>
+				<h2 className='text-2xl font-semibold text-color'>Upcoming events</h2>
 				{upcoming.length === 0 ? (
-					<p className='text-gray-400'>No upcoming events right now.</p>
+					<p className='text-color-secondary'>No upcoming events right now.</p>
 				) : (
 					<div className='space-y-8'>
 						{upcoming.map((event, index) => (
@@ -33,13 +33,13 @@ export function EventsSections({ upcoming, past }: EventsSectionsProps) {
 			<Divider />
 
 			<section className='space-y-6'>
-				<h2 className='text-2xl font-semibold text-white'>Past events</h2>
-				<p className='text-gray-400 text-sm max-w-2xl'>
+				<h2 className='text-2xl font-semibold text-color'>Past events</h2>
+				<p className='text-color-secondary text-sm max-w-2xl'>
 					Relive the energy — tap through to Highlights for photos and story
 					reels.
 				</p>
 				{past.length === 0 ? (
-					<p className='text-gray-400'>No past events listed yet.</p>
+					<p className='text-color-secondary'>No past events listed yet.</p>
 				) : (
 					<div className='space-y-4'>
 						{past.map((event, index) => (

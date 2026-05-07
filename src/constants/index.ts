@@ -13,7 +13,7 @@ export const NAVIGATION = {
 		{ label: 'Events', path: '/events' },
 		{ label: 'Music', path: '/music' },
 		{ label: 'Highlights', path: '/highlights' },
-		{ label: 'Socials', path: '/links' },
+		{ label: 'Socials', path: '/socials' },
 		{ label: 'About', path: '/about' },
 		{ label: 'Contact', path: '/contact' },
 	],
