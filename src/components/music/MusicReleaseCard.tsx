@@ -64,7 +64,8 @@ export function MusicReleaseCard({ entry }: MusicReleaseCardProps) {
 				},
 				body: { className: 'p-0' },
 				title: {
-					className: 'text-lg font-semibold line-clamp-2 px-3 pt-1 m-0',
+					className:
+						'm-0 px-3 pt-1 text-center text-lg font-semibold line-clamp-2',
 				},
 				content: {
 					className: 'px-3 pb-3 pt-2',
