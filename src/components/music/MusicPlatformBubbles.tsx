@@ -28,7 +28,7 @@ export function MusicPlatformBubbles({ entry }: { entry: MusicEntry }) {
 
 	return (
 		<div
-			className='flex flex-wrap gap-2 mt-3 items-start content-start'
+			className='mt-3 flex w-full flex-wrap items-center justify-center content-center gap-2'
 			onClick={stopBubble}
 			onKeyDown={e => e.stopPropagation()}
 			role='group'
