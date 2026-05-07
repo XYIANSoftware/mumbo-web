@@ -124,7 +124,7 @@ export function HomeHero() {
 					ease: 'easeInOut',
 				}}
 			>
-				<i className='pi pi-angle-down text-3xl text-white opacity-50' />
+				<i className='pi pi-angle-down text-3xl text-color opacity-50' />
 			</motion.div>
 		</section>
 	)

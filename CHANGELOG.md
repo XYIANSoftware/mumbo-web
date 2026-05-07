@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-05-06 — Page shell, theme tokens, shared social constants
+
+- **Checkpoint**: commit `ce9dbf2` pushed to `development` before this pass (easy revert on Netlify).
+- **`src/constants/page-shell.ts`**: **`PAGE_CONTAINER_CLASS`**, **`PAGE_SHELL_CLASS`** — marketing routes use one shell instead of repeating `container mx-auto px-4 py-12`.
+- **Semantic text**: **`text-color`** / **`text-color-secondary`** (from globals / Lara) replace ad hoc **`text-gray-*`** / **`text-white`** on header nav, events (**`EventsSections`**, **`EventCard`**), highlights, links (**`/socials`** UI), home (**`HomeStatsGrid`**, **`HomeManInTheHat`**, **`HomeHero`** scroll hint), about/contact body copy, **`ContentCard`**.
+- **`src/constants/about-page-social.ts`**, **`contact-page-social.ts`**: About and Contact social lists (distinct from footer **`footer-social.ts`**).
+- **`events/[eventName]`**: “event not found” copy escapes apostrophes for ESLint; detail panel uses theme-friendly grays / **`bg-background-paper/80`** instead of raw **`gray-*`**.
+- **Not in this pass**: merch, admin dashboard, `not-found`.
+
 ## 2026-05-06 — SoundCloud profile embed
 
 - **`src/constants/streaming.ts`**: **`MUMBO_SOUNDCLOUD_PROFILE_URL`** + **`MUMBO_SOUNDCLOUD_EMBED_SRC`**

@@ -10,7 +10,7 @@ export interface HighlightAlbumStripProps {
 export function HighlightAlbumStrip({ items, onSelect }: HighlightAlbumStripProps) {
 	return (
 		<>
-			<h2 className='text-lg font-semibold text-white mb-3'>Album strip</h2>
+			<h2 className='text-lg font-semibold text-color mb-3'>Album strip</h2>
 			<div className='overflow-x-auto pb-2 -mx-4 px-4'>
 				<div className='flex gap-3 snap-x snap-mandatory min-w-min'>
 					{items.map(item => (

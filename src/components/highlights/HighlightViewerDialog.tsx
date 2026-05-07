@@ -48,7 +48,7 @@ export function HighlightViewerDialog({ item, onHide }: HighlightViewerDialogPro
 				<video src={item?.src} controls className='w-full h-auto rounded-lg' />
 			)}
 			{item?.description && (
-				<p className='mt-4 text-gray-400'>{item.description}</p>
+				<p className='mt-4 text-color-secondary'>{item.description}</p>
 			)}
 			{item?.instagramHighlightUrl && (
 				<div className='mt-4'>

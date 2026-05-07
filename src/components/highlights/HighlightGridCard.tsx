@@ -36,7 +36,9 @@ export function HighlightGridCard({
 				<div className='p-4'>
 					<h3 className='text-lg font-semibold mb-2'>{item.title}</h3>
 					{item.description && (
-						<p className='text-gray-400 text-sm mb-3'>{item.description}</p>
+						<p className='text-color-secondary text-sm mb-3'>
+							{item.description}
+						</p>
 					)}
 					<div className='flex flex-wrap gap-2'>
 						<Button

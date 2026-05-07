@@ -4,43 +4,12 @@ import { motion } from 'framer-motion'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { Card } from 'primereact/card'
 import Image from 'next/image'
-
-const socialLinks = [
-	{
-		platform: 'Spotify',
-		url: 'https://open.spotify.com/artist/mumbobeatz',
-		icon: 'pi pi-spotify',
-	},
-	{
-		platform: 'SoundCloud',
-		url: 'https://soundcloud.com/mumbobeatz',
-		icon: 'pi pi-cloud',
-	},
-	{
-		platform: 'YouTube',
-		url: 'https://youtube.com/@mumbobeatz',
-		icon: 'pi pi-youtube',
-	},
-	{
-		platform: 'Instagram',
-		url: 'https://instagram.com/mumbobeatz',
-		icon: 'pi pi-instagram',
-	},
-	{
-		platform: 'Twitter',
-		url: 'https://twitter.com/mumbobeatz',
-		icon: 'pi pi-twitter',
-	},
-	{
-		platform: 'Facebook',
-		url: 'https://www.facebook.com/profile.php?id=61575874555012',
-		icon: 'pi pi-facebook',
-	},
-]
+import { ABOUT_PAGE_SOCIAL_LINKS } from '@/constants/about-page-social'
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 
 export default function AboutPage() {
 	return (
-		<div className='container mx-auto px-4 py-12'>
+		<div className={PAGE_SHELL_CLASS}>
 			<PageHeader title='About Mumbo' subtitle='The story behind the beats' />
 
 			<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
@@ -74,13 +43,13 @@ export default function AboutPage() {
 							</div>
 						</div>
 						<div className='flex flex-wrap gap-4 justify-center'>
-							{socialLinks.map(link => (
+							{ABOUT_PAGE_SOCIAL_LINKS.map(link => (
 								<a
 									key={link.platform}
 									href={link.url}
 									target='_blank'
 									rel='noopener noreferrer'
-									className='text-gray-400 hover:text-primary-light transition-colors'
+									className='text-color-secondary hover:text-primary-light transition-colors'
 									aria-label={link.platform}
 								>
 									<i className={`${link.icon} text-4xl`}></i>
@@ -103,7 +72,7 @@ export default function AboutPage() {
 					>
 						<div className='prose prose-invert max-w-none'>
 							<h2 className='text-2xl font-semibold mb-6'>The Journey</h2>
-							<p className='mb-4 text-gray-200'>
+							<p className='mb-4 text-color-secondary'>
 								Mumbo is an innovative electronic music producer and artist,
 								known for blending EDM with playful, cartoon-inspired elements.
 								With releases like &quot;Feelin&apos; Pretty Suavé&quot; and
@@ -111,14 +80,14 @@ export default function AboutPage() {
 								sound that bridges the gap between energetic dance music and
 								nostalgic vibes.
 							</p>
-							<p className='mb-4 text-gray-200'>
+							<p className='mb-4 text-color-secondary'>
 								Starting with the &quot;Mumbo Jumbo&quot; series, which has now
 								reached its 6th episode, Mumbo has consistently pushed the
 								boundaries of electronic music. Each release showcases a
 								perfect fusion of hard-hitting beats and whimsical elements that
 								set him apart in the EDM scene.
 							</p>
-							<p className='mb-4 text-gray-200'>
+							<p className='mb-4 text-color-secondary'>
 								Recent projects include the successful &quot;Mumbo&apos;s
 								Secret Stuff Vol. 1&quot; and notable remixes like the
 								&quot;Satellite (Mumbo Flip)&quot; and &quot;Eat the Bass
@@ -128,14 +97,14 @@ export default function AboutPage() {
 							<h3 className='text-xl font-semibold mb-4 mt-8'>
 								Latest Releases
 							</h3>
-							<ul className='list-disc pl-6 mb-6 text-gray-200'>
+							<ul className='list-disc pl-6 mb-6 text-color-secondary'>
 								<li>Feelin&apos; Pretty Suavé</li>
 								<li>Project Seismic</li>
 								<li>Mumbo&apos;s Secret Stuff Vol. 1</li>
 								<li>Satellite (Mumbo Flip)</li>
 								<li>Eat the Bass (Mumbo flip)</li>
 							</ul>
-							<p className='text-gray-200'>
+							<p className='text-color-secondary'>
 								Catch Mumbo live at various venues and festivals, where the
 								energy of his productions comes to life in dynamic,
 								unforgettable performances.

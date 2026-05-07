@@ -29,11 +29,11 @@ export function LinksMainGrid({ links }: { links: Link[] }) {
 						<div className='flex items-center gap-4 p-4'>
 							{LinksPlatformIcon(link.platform, 'text-5xl')}
 							<div className='min-w-0 text-left'>
-								<h2 className='text-base font-medium mb-1 text-white truncate'>
+								<h2 className='text-base font-medium mb-1 text-color truncate'>
 									{link.title}
 								</h2>
 								{link.description && (
-									<p className='text-sm text-gray-200 truncate'>
+									<p className='text-sm text-color-secondary truncate'>
 										{link.description}
 									</p>
 								)}

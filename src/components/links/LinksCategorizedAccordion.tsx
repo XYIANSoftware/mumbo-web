@@ -31,10 +31,10 @@ export function LinksCategorizedAccordion({ links }: { links: GroupedLinks }) {
 							header={
 								<div className='flex items-center gap-3'>
 									{LinksPlatformIcon(category, 'text-2xl')}
-									<span className='text-white'>
+									<span className='text-color'>
 										{formatCategory(category)}
 									</span>
-									<span className='text-sm text-gray-200'>
+									<span className='text-sm text-color-secondary'>
 										({categoryLinks.length})
 									</span>
 								</div>
@@ -56,11 +56,11 @@ export function LinksCategorizedAccordion({ links }: { links: GroupedLinks }) {
 										<div className='flex items-center gap-3 p-3'>
 											{LinksPlatformIcon(link.platform, 'text-2xl')}
 											<div className='text-left'>
-												<h3 className='text-base font-medium mb-0.5 text-white'>
+												<h3 className='text-base font-medium mb-0.5 text-color'>
 													{link.title}
 												</h3>
 												{link.description && (
-													<p className='text-sm text-gray-200'>
+													<p className='text-sm text-color-secondary'>
 														{link.description}
 													</p>
 												)}

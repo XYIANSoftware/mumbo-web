@@ -6,11 +6,12 @@ import { MusicCatalogSection } from '@/components/music/MusicCatalogSection'
 import { SoundCloudProfileEmbed } from '@/components/music/SoundCloudProfileEmbed'
 import { SpotifyArtistEmbed } from '@/components/music/SpotifyArtistEmbed'
 import { MUSIC_CATALOG_SECTIONS } from '@/components/music/music-page-data'
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 import { Divider } from 'primereact/divider'
 
 export default function MusicPage() {
 	return (
-		<div className='container mx-auto px-4 py-12'>
+		<div className={PAGE_SHELL_CLASS}>
 			<PageHeader
 				title='Music'
 				subtitle='Tracks, flips, and live sets — pick your platform'

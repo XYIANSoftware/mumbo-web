@@ -20,7 +20,7 @@ export function HighlightCardMedia({ item }: { item: HighlightItem }) {
 			/>
 			{item.type === 'video' && (
 				<div className='absolute inset-0 flex items-center justify-center bg-black/50 pointer-events-none'>
-					<i className='pi pi-play text-4xl text-white' />
+					<i className='pi pi-play text-4xl text-color' />
 				</div>
 			)}
 		</div>

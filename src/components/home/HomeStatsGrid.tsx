@@ -11,25 +11,25 @@ export function HomeStatsGrid() {
 				<h3 className='text-xl font-semibold mb-2 text-primary-light'>
 					5+ Years
 				</h3>
-				<p className='text-gray-400'>Of Experience</p>
+				<p className='text-color-secondary'>Of Experience</p>
 			</div>
 			<div>
 				<h3 className='text-xl font-semibold mb-2 text-secondary-light'>
 					200+
 				</h3>
-				<p className='text-gray-400'>Live Shows</p>
+				<p className='text-color-secondary'>Live Shows</p>
 			</div>
 			<div>
 				<h3 className='text-xl font-semibold mb-2 text-accent-light'>
 					50+
 				</h3>
-				<p className='text-gray-400'>Original Tracks</p>
+				<p className='text-color-secondary'>Original Tracks</p>
 			</div>
 			<div>
 				<h3 className='text-xl font-semibold mb-2 text-primary-light'>
 					100K+
 				</h3>
-				<p className='text-gray-400'>Happy Fans</p>
+				<p className='text-color-secondary'>Happy Fans</p>
 			</div>
 		</div>
 	)

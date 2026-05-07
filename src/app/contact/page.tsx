@@ -7,33 +7,8 @@ import { Card } from '@/components/ui/Card'
 import { InputText } from 'primereact/inputtext'
 import { InputTextarea } from 'primereact/inputtextarea'
 import { Button } from 'primereact/button'
-
-const socialLinks = [
-	{
-		platform: 'Instagram',
-		url: 'https://instagram.com/mumbobeatz',
-		icon: 'pi pi-instagram',
-		label: '@mumbobeatz',
-	},
-	{
-		platform: 'Twitter',
-		url: 'https://twitter.com/Mumbobeatz',
-		icon: 'pi pi-twitter',
-		label: '@Mumbobeatz',
-	},
-	{
-		platform: 'YouTube',
-		url: 'https://youtube.com/@mumbobeatz',
-		icon: 'pi pi-youtube',
-		label: '@mumbobeatz',
-	},
-	{
-		platform: 'Facebook',
-		url: 'https://www.facebook.com/profile.php?id=61575874555012',
-		icon: 'pi pi-facebook',
-		label: 'DJ Mumbo',
-	},
-]
+import { CONTACT_PAGE_SOCIAL_LINKS } from '@/constants/contact-page-social'
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 
 export default function ContactPage() {
 	const [formData, setFormData] = useState({
@@ -50,7 +25,7 @@ export default function ContactPage() {
 	}
 
 	return (
-		<div className='container mx-auto px-4 py-12'>
+		<div className={PAGE_SHELL_CLASS}>
 			<PageHeader
 				title='Contact'
 				subtitle='Get in touch for bookings and collaborations'
@@ -133,18 +108,18 @@ export default function ContactPage() {
 					<Card className='h-full'>
 						<h2 className='text-2xl font-semibold mb-6'>Connect With Me</h2>
 						<div className='space-y-6'>
-							<p className='text-gray-400'>
+							<p className='text-color-secondary'>
 								Follow DJ Mumbo on social media for the latest updates,
 								releases, and behind-the-scenes content.
 							</p>
 							<div className='space-y-4'>
-								{socialLinks.map(link => (
+								{CONTACT_PAGE_SOCIAL_LINKS.map(link => (
 									<a
 										key={link.platform}
 										href={link.url}
 										target='_blank'
 										rel='noopener noreferrer'
-										className='flex items-center gap-4 text-gray-400 hover:text-primary-light transition-colors p-4 rounded-lg hover:bg-background-paper/50'
+										className='flex items-center gap-4 text-color-secondary hover:text-primary-light transition-colors p-4 rounded-lg hover:bg-background-paper/50'
 									>
 										<i className={`${link.icon} text-3xl`}></i>
 										<div>
@@ -158,7 +133,7 @@ export default function ContactPage() {
 								<h3 className='text-xl font-semibold mb-4'>
 									Booking Inquiries
 								</h3>
-								<p className='text-gray-400'>
+								<p className='text-color-secondary'>
 									For booking inquiries, please use the contact form or reach
 									out directly via email at{' '}
 									<a

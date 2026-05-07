@@ -28,7 +28,7 @@ export default function Header() {
 				<Link
 					key={item.path}
 					href={item.path}
-					className={`text-white hover:text-primary-light transition-colors ${
+					className={`text-color hover:text-primary-light transition-colors ${
 						pathname === item.path ? 'text-primary-light font-semibold' : ''
 					}`}
 				>
@@ -43,7 +43,7 @@ export default function Header() {
 			<Button
 				icon='pi pi-bars'
 				onClick={() => setSidebarVisible(true)}
-				className='md:hidden p-button-text text-white hover:bg-background-paper/30 p-3'
+				className='md:hidden p-button-text text-color hover:bg-background-paper/30 p-3'
 				aria-label='Menu'
 			/>
 		</div>
@@ -74,7 +74,7 @@ export default function Header() {
 						<Button
 							icon='pi pi-times'
 							onClick={() => setSidebarVisible(false)}
-							className='p-button-text text-white hover:bg-background-paper/30 p-3'
+							className='p-button-text text-color hover:bg-background-paper/30 p-3'
 							aria-label='Close'
 						/>
 					</div>
@@ -87,7 +87,7 @@ export default function Header() {
 									className={`px-4 py-3 text-lg rounded-lg transition-colors hover:bg-background-paper/50 ${
 										pathname === item.path
 											? 'bg-background-paper text-primary-light font-semibold'
-											: 'text-white'
+											: 'text-color'
 									}`}
 									onClick={() => setSidebarVisible(false)}
 								>

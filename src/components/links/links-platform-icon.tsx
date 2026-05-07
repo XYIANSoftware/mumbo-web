@@ -23,9 +23,9 @@ export function LinksPlatformIcon(
 		case 'INSTAGRAM':
 			return <FaInstagram className={`text-[#E4405F] ${className}`} />
 		case 'APPLE':
-			return <SiApplemusic className={`text-gray-100 ${className}`} />
+			return <SiApplemusic className={`text-color-secondary ${className}`} />
 		case 'TIKTOK':
-			return <FaTiktok className={`text-gray-100 ${className}`} />
+			return <FaTiktok className={`text-color-secondary ${className}`} />
 		default:
 			return null
 	}

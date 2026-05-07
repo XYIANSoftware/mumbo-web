@@ -12,6 +12,7 @@ import { HighlightGridCard } from './HighlightGridCard'
 import { HighlightInstagramPromoCard } from './HighlightInstagramPromoCard'
 import { HighlightViewerDialog } from './HighlightViewerDialog'
 import type { HighlightItem } from './highlight-model'
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 
 export function HighlightsPageView() {
 	const [selectedItem, setSelectedItem] = useState<HighlightItem | null>(null)
@@ -22,7 +23,7 @@ export function HighlightsPageView() {
 	)
 
 	return (
-		<div className='container mx-auto px-4 py-12'>
+		<div className={PAGE_SHELL_CLASS}>
 			<PageHeader
 				title='Highlights'
 				subtitle='Photos, videos, and Instagram story reels from the biggest nights'

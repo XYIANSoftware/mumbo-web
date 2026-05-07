@@ -6,6 +6,7 @@ import { Button } from 'primereact/button';
 import { Card } from '@/components/ui/Card';
 import Link from 'next/link';
 import { use } from 'react';
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell';
 
 interface Event {
   id: string;
@@ -59,10 +60,12 @@ export default function EventPage({ params }: EventPageProps) {
 
   if (!event) {
     return (
-      <div className="container mx-auto px-4 py-12">
+      <div className={PAGE_SHELL_CLASS}>
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Event Not Found</h1>
-          <p className="text-gray-400 mb-8">The event you're looking for doesn't exist.</p>
+          <p className="text-color-secondary mb-8">
+            The event you&apos;re looking for doesn&apos;t exist.
+          </p>
           <Link href="/events">
             <Button label="Back to Events" icon="pi pi-arrow-left" className="p-button-rounded" />
           </Link>
@@ -72,7 +75,7 @@ export default function EventPage({ params }: EventPageProps) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className={PAGE_SHELL_CLASS}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -108,7 +111,7 @@ export default function EventPage({ params }: EventPageProps) {
               <div>
                 <h1 className="text-4xl font-bold mb-4">{event.title}</h1>
                 
-                <div className="space-y-3 text-gray-300">
+                <div className="space-y-3 text-color-secondary">
                   <div className="flex items-center gap-3">
                     <i className="pi pi-calendar text-primary-light"></i>
                     <span>{event.date}</span>
@@ -125,13 +128,13 @@ export default function EventPage({ params }: EventPageProps) {
               </div>
 
               <div className="space-y-4">
-                <p className="text-gray-400 leading-relaxed text-lg">
+                <p className="text-color-secondary leading-relaxed text-lg">
                   {event.description}
                 </p>
                 
-                <div className="bg-gray-800/50 rounded-lg p-4">
+                <div className="bg-background-paper/80 rounded-lg p-4">
                   <h3 className="text-lg font-semibold mb-2">Event Details</h3>
-                  <ul className="text-gray-300 space-y-2">
+                  <ul className="text-color-secondary space-y-2">
                     <li>• Doors open 30 minutes before show time</li>
                     <li>• 21+ event with valid ID required</li>
                     <li>• No outside food or beverages</li>

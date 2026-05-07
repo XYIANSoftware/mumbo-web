@@ -16,10 +16,10 @@ export function HighlightInstagramPromoCard() {
 		>
 			<div className='flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
 				<div>
-					<h2 className='text-xl font-semibold text-white mb-1'>
+					<h2 className='text-xl font-semibold text-color mb-1'>
 						Instagram highlights
 					</h2>
-					<p className='text-gray-400 text-sm max-w-xl'>
+					<p className='text-color-secondary text-sm max-w-xl'>
 						Each big show gets a story highlight — jump straight to the reel on
 						Instagram.
 					</p>

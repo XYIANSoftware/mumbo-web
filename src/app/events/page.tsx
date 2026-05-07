@@ -5,6 +5,7 @@ import { PageHeader } from '@/components/ui/PageHeader'
 import { EventsListSkeleton } from '@/components/events/EventsListSkeleton'
 import { EventsSections } from '@/components/events/EventsSections'
 import { Event } from '@/types/content'
+import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 import { Toast } from 'primereact/toast'
 
 function sortPastEvents(a: Event, b: Event) {
@@ -50,7 +51,7 @@ export default function EventsPage() {
 	}, [events])
 
 	return (
-		<div className='container mx-auto px-4 py-12'>
+		<div className={PAGE_SHELL_CLASS}>
 			<Toast ref={toast} />
 			<PageHeader title='Events' subtitle='Catch DJ Mumbo live in action' />
 

@@ -45,7 +45,9 @@ export function ContentCard({ link, index = 0 }: ContentCardProps) {
 					<div className='flex flex-col items-start'>
 						<span className='font-semibold'>{link.title}</span>
 						{link.description && (
-							<span className='text-sm text-gray-400'>{link.description}</span>
+							<span className='text-sm text-color-secondary'>
+								{link.description}
+							</span>
 						)}
 					</div>
 				</div>
