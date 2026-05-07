@@ -56,7 +56,7 @@ export function MusicReleaseCard({ entry }: MusicReleaseCardProps) {
 			pt={{
 				root: {
 					className:
-						'h-full cursor-pointer border-round-xl overflow-hidden ' +
+						'h-full w-full cursor-pointer border-round-xl overflow-hidden ' +
 						'transition-shadow transition-duration-150 hover:shadow-md',
 				},
 				header: {
