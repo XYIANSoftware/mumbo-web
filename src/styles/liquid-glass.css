@@ -1,0 +1,197 @@
+/**
+ * Liquid glass / glassmorphism utilities — mobile Header drawer & controls.
+ * Imported from `globals.css` so tokens stay in one pipeline with Tailwind.
+ * Prefer extending here over inline Tailwind when layering shadows + blur + gradients.
+ */
+
+/**
+ * Prime Sidebar shell — applied via `pt.root` / `pt.content` so the themed
+ * `.p-sidebar` box is transparent, clipped, and sized (overrides Lara + PR defaults).
+ */
+.liquid-glass-sidebar-root.p-sidebar {
+	width: min(100vw, 22rem) !important;
+	max-width: 100vw !important;
+	min-width: 0 !important;
+	overflow: hidden !important;
+	border: none !important;
+	box-shadow: none !important;
+	background: transparent !important;
+	border-radius: 1.75rem 0 0 1.75rem !important;
+}
+
+@media (min-width: 640px) {
+	.liquid-glass-sidebar-root.p-sidebar {
+		border-radius: 2rem 0 0 2rem !important;
+	}
+}
+
+.liquid-glass-sidebar-content.p-sidebar-content {
+	display: flex !important;
+	flex-direction: column !important;
+	flex: 1 1 auto !important;
+	min-height: 0 !important;
+	min-width: 0 !important;
+	overflow: hidden !important;
+	border: none !important;
+	background: transparent !important;
+	border-radius: inherit !important;
+}
+
+.liquid-glass-drawer-mask {
+	backdrop-filter: blur(18px) saturate(1.15);
+	-webkit-backdrop-filter: blur(18px) saturate(1.15);
+	background: color-mix(
+		in srgb,
+		var(--surface-ground) 82%,
+		var(--primary-color) 10%
+	) !important;
+	transition: opacity 0.3s ease;
+}
+
+.liquid-glass-drawer {
+	position: relative;
+	overflow: hidden;
+	border-radius: 1.75rem 0 0 1.75rem;
+	border: 1px solid color-mix(
+		in srgb,
+		var(--primary-color) 22%,
+		rgba(255, 255, 255, 0.35)
+	);
+	background: linear-gradient(
+		168deg,
+		color-mix(in srgb, var(--primary-color) 16%, rgba(255, 255, 255, 0.22))
+			0%,
+		color-mix(in srgb, var(--surface-100) 45%, rgba(255, 255, 255, 0.08))
+			40%,
+		color-mix(in srgb, var(--surface-ground) 92%, var(--primary-color) 5%)
+			100%
+	);
+	backdrop-filter: blur(24px) saturate(1.2);
+	-webkit-backdrop-filter: blur(24px) saturate(1.2);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.38),
+		inset 1px 0 0 color-mix(in srgb, var(--primary-color) 15%, white),
+		inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+		0 16px 48px rgba(0, 0, 0, 0.42),
+		-10px 0 36px color-mix(in srgb, var(--primary-color) 22%, transparent),
+		-4px 0 26px color-mix(in srgb, var(--pink-500) 16%, transparent);
+}
+
+@media (min-width: 640px) {
+	.liquid-glass-drawer {
+		border-radius: 2rem 0 0 2rem;
+	}
+}
+
+.liquid-glass-menu-btn.p-button {
+	width: 2.75rem;
+	height: 2.75rem;
+	padding: 0;
+	border-radius: 9999px;
+	border: 1px solid rgba(255, 255, 255, 0.32);
+	background: linear-gradient(
+		155deg,
+		rgba(255, 255, 255, 0.26),
+		rgba(255, 255, 255, 0.1)
+	);
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.4),
+		0 4px 18px rgba(0, 0, 0, 0.28),
+		0 0 22px color-mix(in srgb, var(--primary-color) 28%, transparent);
+	color: var(--text-color);
+}
+
+.liquid-glass-menu-btn.p-button:hover {
+	background: linear-gradient(
+		155deg,
+		rgba(255, 255, 255, 0.26),
+		rgba(255, 255, 255, 0.1)
+	);
+	border-color: color-mix(in srgb, var(--primary-color) 35%, white);
+}
+
+/** Drawer title — solid theme color + glow (no fragile bg-clip-only text) */
+.liquid-glass-drawer-title {
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	color: var(--primary-light, var(--primary-color));
+	text-shadow:
+		0 0 22px color-mix(in srgb, var(--primary-color) 55%, transparent),
+		0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/** Decorative blobs — theme primary / pink / accent */
+.liquid-glass-aura-tl {
+	background: radial-gradient(
+		circle at 30% 30%,
+		color-mix(in srgb, var(--primary-color) 38%, transparent),
+		transparent 68%
+	);
+}
+
+.liquid-glass-aura-bl {
+	background: radial-gradient(
+		circle at 70% 70%,
+		color-mix(in srgb, var(--pink-500) 28%, transparent),
+		transparent 65%
+	);
+}
+
+.liquid-glass-aura-mid {
+	background: radial-gradient(
+		circle at 50% 50%,
+		color-mix(in srgb, var(--accent-light) 22%, transparent),
+		transparent 62%
+	);
+}
+
+.liquid-glass-aura-edge {
+	background: linear-gradient(
+		90deg,
+		color-mix(in srgb, var(--primary-color) 22%, transparent),
+		transparent
+	);
+	filter: blur(24px);
+}
+
+.liquid-glass-nav-link {
+	border-radius: 1rem;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(255, 255, 255, 0.05);
+	transition:
+		border-color 0.28s ease,
+		background 0.28s ease,
+		box-shadow 0.28s ease,
+		color 0.28s ease;
+}
+
+.liquid-glass-nav-link:hover {
+	border-color: color-mix(in srgb, var(--primary-color) 45%, white);
+	background: color-mix(in srgb, var(--highlight-bg) 85%, transparent);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+	box-shadow:
+		0 0 28px color-mix(in srgb, var(--primary-color) 22%, transparent),
+		inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.liquid-glass-nav-link[data-active='true'] {
+	border-color: color-mix(in srgb, var(--primary-color) 55%, white);
+	background: color-mix(in srgb, var(--primary-color) 24%, transparent);
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.14),
+		0 0 26px color-mix(in srgb, var(--primary-color) 35%, transparent);
+	color: var(--primary-light);
+	font-weight: 600;
+}
+
+.liquid-glass-drawer-footer {
+	border-top: 1px solid rgba(255, 255, 255, 0.12);
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.03),
+		rgba(255, 255, 255, 0)
+	);
+}

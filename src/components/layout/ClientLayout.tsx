@@ -11,9 +11,11 @@ interface ClientLayoutProps {
 export default function ClientLayout({ children }: ClientLayoutProps) {
 	return (
 		<PrimeReactProvider value={{ unstyled: false, pt: {} }}>
-			<Header />
-			<main className='relative grow'>{children}</main>
-			<Footer />
+			<div className='relative flex min-h-screen flex-col'>
+				<Header />
+				<main className='relative z-[1] flex-1'>{children}</main>
+				<Footer />
+			</div>
 		</PrimeReactProvider>
 	)
 }

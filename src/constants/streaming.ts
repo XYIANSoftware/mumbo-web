@@ -6,6 +6,12 @@ export const MUMBO_SPOTIFY_ARTIST_URL =
 export const MUMBO_SPOTIFY_EMBED_SRC =
 	'https://open.spotify.com/embed/artist/0v4RYCckfkFu4dXWl35BXl?utm_source=generator'
 
+/** Spotify embed iframe height in px (widget chrome + track list). */
+export const SPOTIFY_EMBED_HEIGHT_PX = 432
+
+/** SoundCloud HTML5 widget iframe height in px (visual profile player). */
+export const SOUNDCLOUD_EMBED_HEIGHT_PX = 520
+
 /** Profile URL ([mumbobeatz on SoundCloud](https://soundcloud.com/mumbobeatz)). */
 export const MUMBO_SOUNDCLOUD_PROFILE_URL = 'https://soundcloud.com/mumbobeatz'
 

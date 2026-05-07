@@ -20,13 +20,11 @@ export function HomeHero() {
 	const heroY = useTransform(heroScroll, [0, 1], ['0%', '50%'])
 
 	return (
-		<section
-			ref={heroRef}
-			className='relative h-[100dvh] flex items-start justify-center overflow-hidden'
-		>
+		<section className='relative flex h-[100dvh] items-start justify-center overflow-hidden'>
 			<motion.div
+				ref={heroRef}
 				style={{ y: heroY }}
-				className='absolute inset-0 z-0 h-[150%] top-0'
+				className='absolute inset-0 top-0 z-0 h-[150%]'
 			>
 				{!heroImageLoaded && (
 					<div className='absolute inset-0 z-10'>
@@ -105,7 +103,6 @@ export function HomeHero() {
 							label='Listen Now'
 							icon='pi pi-play'
 							className='p-button-lg w-full sm:w-auto p-3'
-							severity='info'
 							raised
 							size='large'
 						/>

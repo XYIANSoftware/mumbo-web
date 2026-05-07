@@ -17,11 +17,11 @@ export function FooterBrand({
 		<div
 			className={`flex flex-col items-center md:items-start text-center md:text-left shrink-0 ${className}`.trim()}
 		>
-			<Link href='/' className='mb-4'>
+			<Link href='/' className='mb-4 inline-block max-w-full'>
 				<img
 					src='/images/mumbo-assets/Mumbo_logo.png'
 					alt='Mumbo'
-					className='h-8 w-auto'
+					className='h-[clamp(3.25rem,5vw+2rem,10rem)] w-auto max-w-[min(100%,22rem)] object-contain object-left'
 				/>
 			</Link>
 			<p className='text-color-secondary max-w-xs'>{tagline}</p>

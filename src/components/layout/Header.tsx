@@ -6,7 +6,27 @@ import { usePathname } from 'next/navigation'
 import { Toolbar } from 'primereact/toolbar'
 import { Sidebar } from 'primereact/sidebar'
 import { Button } from 'primereact/button'
+import type { SidebarPassThroughOptions } from 'primereact/sidebar'
 import { SITE_NAV_ITEMS } from '@/constants/site-nav'
+
+const SIDEBAR_PT: SidebarPassThroughOptions = {
+	mask: {
+		className: 'liquid-glass-drawer-mask',
+	},
+	/* Hide Prime empty header row — custom chrome lives in children. */
+	header: {
+		className: 'hidden',
+	},
+	root: {
+		className:
+			'liquid-glass-sidebar-root border-none bg-transparent shadow-none',
+	},
+	content: {
+		className:
+			'liquid-glass-sidebar-content h-full min-h-0 p-0 border-none ' +
+			'bg-transparent',
+	},
+}
 
 export default function Header() {
 	const [sidebarVisible, setSidebarVisible] = useState(false)
@@ -43,7 +63,7 @@ export default function Header() {
 			<Button
 				icon='pi pi-bars'
 				onClick={() => setSidebarVisible(true)}
-				className='md:hidden p-button-text text-color hover:bg-background-paper/30 p-3'
+				className='liquid-glass-menu-btn md:!hidden'
 				aria-label='Menu'
 			/>
 		</div>
@@ -63,37 +83,71 @@ export default function Header() {
 
 			<Sidebar
 				visible={sidebarVisible}
-				onHide={() => setSidebarVisible(false)}
-				className='w-full sm:w-80 p-0'
 				position='right'
 				showCloseIcon={false}
+				className='border-none p-0'
+				pt={SIDEBAR_PT}
+				onHide={() => setSidebarVisible(false)}
 			>
-				<div className='flex flex-col h-full bg-background-primary'>
-					<div className='flex justify-between items-center p-4 border-b border-background-paper'>
-						<span className='font-display text-xl font-bold'>Menu</span>
-						<Button
-							icon='pi pi-times'
-							onClick={() => setSidebarVisible(false)}
-							className='p-button-text text-color hover:bg-background-paper/30 p-3'
-							aria-label='Close'
-						/>
+				<div className='liquid-glass-drawer flex h-full min-h-0 flex-col'>
+					<div
+						className='pointer-events-none absolute inset-0 overflow-hidden rounded-l-[1.75rem] sm:rounded-l-[2rem]'
+						aria-hidden
+					>
+						<div className='liquid-glass-aura-tl absolute -right-10 -top-14 h-56 w-56 rounded-full blur-3xl' />
+						<div className='liquid-glass-aura-bl absolute -bottom-12 -left-8 h-48 w-48 rounded-full blur-3xl' />
+						<div className='liquid-glass-aura-mid absolute bottom-1/4 right-1/4 h-36 w-36 rounded-full blur-3xl' />
+						<div className='liquid-glass-aura-edge absolute left-0 top-1/2 h-40 w-24 -translate-y-1/2' />
 					</div>
-					<div className='flex-1 overflow-y-auto'>
-						<div className='flex flex-col p-4 gap-2'>
-							{SITE_NAV_ITEMS.map(item => (
-								<Link
-									key={item.path}
-									href={item.path}
-									className={`px-4 py-3 text-lg rounded-lg transition-colors hover:bg-background-paper/50 ${
-										pathname === item.path
-											? 'bg-background-paper text-primary-light font-semibold'
-											: 'text-color'
-									}`}
-									onClick={() => setSidebarVisible(false)}
-								>
-									{item.label}
-								</Link>
-							))}
+
+					<div className='relative z-[1] flex min-h-0 flex-1 flex-col'>
+						{/* Match main Toolbar: minHeight 4rem, px-4 — aligns hamburger + close */}
+						<div
+							className={
+								'liquid-glass-drawer-head flex h-16 min-h-16 shrink-0 ' +
+								'items-center justify-between gap-3 border-b ' +
+								'border-white/20 px-4 backdrop-blur-[2px]'
+							}
+						>
+							<span className='font-display text-lg liquid-glass-drawer-title'>
+								VIBES
+							</span>
+							<Button
+								icon='pi pi-times'
+								onClick={() => setSidebarVisible(false)}
+								className='liquid-glass-menu-btn shrink-0'
+								aria-label='Close menu'
+							/>
+						</div>
+
+						<nav
+							className='flex min-h-0 flex-1 flex-col gap-2 overflow-y-auto px-4 py-4'
+							aria-label='Mobile'
+						>
+							{SITE_NAV_ITEMS.map(item => {
+								const isActive = pathname === item.path
+								return (
+									<Link
+										key={item.path}
+										href={item.path}
+										className={
+											'liquid-glass-nav-link flex items-center ' +
+											'justify-center px-4 py-3 text-center ' +
+											'text-base font-medium'
+										}
+										data-active={isActive ? 'true' : 'false'}
+										onClick={() => setSidebarVisible(false)}
+									>
+										{item.label}
+									</Link>
+								)
+							})}
+						</nav>
+
+						<div className='liquid-glass-drawer-footer px-5 py-4'>
+							<p className='text-center text-xs text-color-secondary'>
+								DJ Mumbo · EDM & playful vibes
+							</p>
 						</div>
 					</div>
 				</div>

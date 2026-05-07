@@ -1,9 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { PageHeader } from '@/components/ui/PageHeader'
 import { Card } from 'primereact/card'
-import Image from 'next/image'
 import { ABOUT_PAGE_SOCIAL_LINKS } from '@/constants/about-page-social'
 import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 
@@ -12,44 +12,49 @@ export default function AboutPage() {
 		<div className={PAGE_SHELL_CLASS}>
 			<PageHeader title='About Mumbo' subtitle='The story behind the beats' />
 
-			<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+			<div className='mx-auto grid w-full max-w-6xl grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-12 lg:items-start'>
 				<motion.div
+					className='w-full min-w-0'
 					initial={{ opacity: 0, x: -20 }}
 					animate={{ opacity: 1, x: 0 }}
 					transition={{ duration: 0.5 }}
 				>
 					<Card
 						pt={{
-							root: { className: 'bg-background-paper border-none' },
-							content: { className: 'p-6' },
+							root: {
+								className:
+									'bg-background-paper border-none h-full',
+							},
+							content: { className: 'p-6 md:p-8' },
 						}}
 					>
-						<div className='relative aspect-square rounded-lg overflow-hidden mb-6'>
+						<div className='relative mb-6 aspect-[4/3] w-full overflow-hidden rounded-xl'>
 							<Image
 								src='/images/mumbo-assets/M_B04850-1-NR.jpg'
-								alt='Mumbo'
+								alt='Mumbo performing'
 								fill
 								className='object-cover'
+								sizes='(max-width: 1024px) 100vw, 50vw'
+								priority
 							/>
 						</div>
-						<div className='flex justify-center mb-6'>
-							<div className='relative h-24 w-48'>
-								<Image
-									src='/images/logo.png'
-									alt='Mumbo Logo'
-									fill
-									className='object-contain'
-								/>
-							</div>
+						<div className='relative mx-auto mb-8 flex h-[clamp(4rem,10vw,11rem)] w-full max-w-[22rem] justify-center'>
+							<Image
+								src='/images/mumbo-assets/Mumbo_logo.png'
+								alt='Mumbo'
+								fill
+								className='object-contain object-center'
+								sizes='(max-width: 1024px) 90vw, 22rem'
+							/>
 						</div>
-						<div className='flex flex-wrap gap-4 justify-center'>
+						<div className='flex flex-wrap justify-center gap-6'>
 							{ABOUT_PAGE_SOCIAL_LINKS.map(link => (
 								<a
 									key={link.platform}
 									href={link.url}
 									target='_blank'
 									rel='noopener noreferrer'
-									className='text-color-secondary hover:text-primary-light transition-colors'
+									className='text-color-secondary transition-colors hover:text-primary-light'
 									aria-label={link.platform}
 								>
 									<i className={`${link.icon} text-4xl`}></i>
@@ -60,18 +65,24 @@ export default function AboutPage() {
 				</motion.div>
 
 				<motion.div
+					className='w-full min-w-0'
 					initial={{ opacity: 0, x: 20 }}
 					animate={{ opacity: 1, x: 0 }}
-					transition={{ duration: 0.5, delay: 0.2 }}
+					transition={{ duration: 0.5, delay: 0.15 }}
 				>
 					<Card
 						pt={{
-							root: { className: 'bg-background-paper border-none h-full' },
-							content: { className: 'p-6' },
+							root: {
+								className:
+									'bg-background-paper border-none h-full',
+							},
+							content: { className: 'p-6 md:p-8' },
 						}}
 					>
-						<div className='prose prose-invert max-w-none'>
-							<h2 className='text-2xl font-semibold mb-6'>The Journey</h2>
+						<div className='max-w-none'>
+							<h2 className='mb-6 text-2xl font-semibold text-color'>
+								The Journey
+							</h2>
 							<p className='mb-4 text-color-secondary'>
 								Mumbo is an innovative electronic music producer and artist,
 								known for blending EDM with playful, cartoon-inspired elements.
@@ -94,10 +105,10 @@ export default function AboutPage() {
 								(Mumbo flip)&quot;, demonstrating versatility and innovation in
 								production.
 							</p>
-							<h3 className='text-xl font-semibold mb-4 mt-8'>
+							<h3 className='mb-4 mt-8 text-xl font-semibold text-color'>
 								Latest Releases
 							</h3>
-							<ul className='list-disc pl-6 mb-6 text-color-secondary'>
+							<ul className='mb-6 list-disc pl-6 text-color-secondary'>
 								<li>Feelin&apos; Pretty Suavé</li>
 								<li>Project Seismic</li>
 								<li>Mumbo&apos;s Secret Stuff Vol. 1</li>

@@ -12,6 +12,7 @@ import { HighlightGridCard } from './HighlightGridCard'
 import { HighlightInstagramPromoCard } from './HighlightInstagramPromoCard'
 import { HighlightViewerDialog } from './HighlightViewerDialog'
 import type { HighlightItem } from './highlight-model'
+import { HIGHLIGHT_GRID_SECTION_CLASS } from '@/constants/highlights-layout'
 import { PAGE_SHELL_CLASS } from '@/constants/page-shell'
 
 export function HighlightsPageView() {
@@ -30,7 +31,7 @@ export function HighlightsPageView() {
 			/>
 
 			<motion.section
-				className='mb-10'
+				className='mb-10 max-w-6xl mx-auto w-full'
 				initial={{ opacity: 0, y: 12 }}
 				animate={{ opacity: 1, y: 0 }}
 				transition={{ duration: 0.45 }}
@@ -42,13 +43,13 @@ export function HighlightsPageView() {
 				/>
 			</motion.section>
 
-			<div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6'>
+			<div className={HIGHLIGHT_GRID_SECTION_CLASS}>
 				{HIGHLIGHT_ITEMS.map((item, index) => (
 					<HighlightGridCard
 						key={item.id}
 						item={item}
 						index={index}
-						onOpenGallery={setSelectedItem}
+						onOpenDetails={setSelectedItem}
 					/>
 				))}
 			</div>

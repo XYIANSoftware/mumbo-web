@@ -1,6 +1,9 @@
 'use client'
 
-import { MUMBO_SOUNDCLOUD_EMBED_SRC } from '@/constants/streaming'
+import {
+	MUMBO_SOUNDCLOUD_EMBED_SRC,
+	SOUNDCLOUD_EMBED_HEIGHT_PX,
+} from '@/constants/streaming'
 import { MusicStreamingSection } from './music-streaming-section'
 
 /** SoundCloud’s official HTML5 widget (visual profile player). */
@@ -15,7 +18,7 @@ export function SoundCloudProfileEmbed() {
 				title='Mumbo on SoundCloud'
 				src={MUMBO_SOUNDCLOUD_EMBED_SRC}
 				width='100%'
-				height={450}
+				height={SOUNDCLOUD_EMBED_HEIGHT_PX}
 				className='border-0 w-full'
 				allow='autoplay'
 				loading='lazy'
